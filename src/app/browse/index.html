@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <!--<link href="css/bootstrap.min.css" rel="stylesheet" />-->
+    <link href="../../../css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="http://use.typekit.net/c/18eb21/1w;brandon-grotesque,2,Y2h:P:i1,Y2g:P:n1,Y2j:P:n3,Y2n:P:n5;open-sans,2,VvG:P:i3,VvD:P:i4,VvF:P:n3,VvH:P:n4/d?3bb2a6e53c9684ffdc9a9bf61f5b2a62850218b0182b3a8f955d7ad2db6645a15a2fece75238ea26f1d85c9a1cbc76cb00e4efb7e79ecf0958e13855066b3466b2732dad8957bb80765959e885ec08226954a671c7986d991f797e750d51ea638e35088bc259d167bb">
+
+</head>
+<body ng-app="app" ng-controller="BrowseController" ng-cloak>
+
+<div class="container">
+    <header>
+        <h1>Wijn</h1>
+        <nav>
+            <ul>
+                <li><a href="">Home</a></li>
+                <li><a href="src/app/browse">Browse</a></li>
+                <li><a href="src/app/timeline">Timeline</a></li>
+                <li><a href="src/app/map">Map</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <div class="carousel">
+        <img src="https://timmeubanks.files.wordpress.com/2012/03/vena_wine_beauty.jpg" alt="" />
+    </div>
+
+    <div class="browse">
+
+        <div class="filters">
+            <ul>
+                <li>Sort by Popularity</li>
+                <li>Sort by Rating</li>
+                <li></li>
+            </ul>
+        </div>
+
+        <div class="list">
+            <div class="loader-div"><span class="loader"><span class="loader-inner"></span></span></div>
+
+
+        <ul>
+            <button ng-disabled="currentPage == 0" ng-click="previousPage()">
+                Previous
+            </button>
+            {{currentPage+1}}
+            <button ng-click="nextPage()">
+                Next
+            </button>
+            <li ng-repeat="w in browseList | orderBy: sortOrder">
+                <div class="img"><img src="{{w.ImageUrl}}" /></div>
+                <div class="details">
+                    <h2>{{w.Name}}</h2>
+                    <div class="attributes"><h3 ng-repeat="a in w.Attributes">{{a.Name.replace('&AMP;', '&');}}</h3></div>
+                    <p>Rating: {{w.highestReview}}</p>
+                </div>
+                <div class="actions">
+                    <h2>{{w.PriceRetail}}</h2>
+                    <p>+</p>
+                </div>
+            </li>
+            <button ng-disabled="currentPage == 0" ng-click="previousPage()">
+                Previous
+            </button>
+            {{currentPage+1}}
+            <button ng-click="nextPage()">
+                Next
+            </button>
+        </ul>
+
+        </div>
+    </div>
+
+
+
+</div>
+
+<footer>
+    <p>&copy; Created by Bernhard Mostrey & Bram Regelbrugge</p>
+</footer>
+
+
+<script src="../../../scripts/jquery-1.11.1.min.js"></script>
+<script src="../../../scripts/angular.js"></script>
+<script src="../../../scripts/angular-animate.min.js"></script>
+<!--<script src="scripts/bootstrap.min.js"></script>-->
+<!--<script src="scripts/ui-bootstrap-0.9.0.min.js"></script>-->
+<!--<script src="scripts/ui-bootstrap-tpls-0.12.0.min.js"></script>-->
+<script src="../../../src/app/app.js"></script>
+
+<script src="BrowseController.js"></script>
+<script src="../../../src/app/shared/Wine.js"></script>
+</body>
+</html>
