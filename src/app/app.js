@@ -4,6 +4,17 @@
 
     var app = angular.module('app', []);
 
+app.directive('fallbackSrc', function () {
+    var fallbackSrc = {
+        link: function postLink(scope, iElement, iAttrs) {
+            iElement.bind('error', function() {
+                angular.element(this).attr("src", iAttrs.fallbackSrc);
+            });
+        }
+    }
+    return fallbackSrc;
+});
+
 /*app.filter('startFrom', function() {
     return function(input, start) {
         start = +start; //parse to int
@@ -77,7 +88,7 @@ function promiseJSON(json, size, offset){
             defer.reject();
         }
     });
-    $.when(promise).done(function(){
+    $.when(promise).fail(function(){
         defer.reject();
     });
     return defer.promise();
@@ -101,4 +112,111 @@ function showClass(klasse){
 }
 function showClass(klasse, time){
     $(klasse).fadeIn(time);
+}
+
+var createCookie = function(name, value, days) {
+    var expires;
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toGMTString();
+    }
+    else {
+        expires = "";
+    }
+    document.cookie = name + "=" + value + expires + "; path=/";
+}
+
+function getCookie(c_name) {
+    if (document.cookie.length > 0) {
+        c_start = document.cookie.indexOf(c_name + "=");
+        if (c_start != -1) {
+            c_start = c_start + c_name.length + 1;
+            c_end = document.cookie.indexOf(";", c_start);
+            if (c_end == -1) {
+                c_end = document.cookie.length;
+            }
+            return unescape(document.cookie.substring(c_start, c_end));
+        }
+    }
+    return "";
+}
+
+function checkStorage(storagename, json, begin, length){
+    var def = $.Deferred();
+
+    var loadedWines = [];
+    //check for cookies
+    if(typeof(Storage) !== "undefined") {
+        // Code for localStorage/sessionStorage.
+
+        if(localStorage.getItem(storagename) && JSON.parse(localStorage.getItem(storagename).length >= 100)){
+
+            loadedWines = getWinesFromData(JSON.parse(localStorage.getItem(storagename)));
+            def.resolve(loadedWines);
+
+        }else{
+            //store 100 json objects in localstorage
+            console.log("Getting 100 wines for localstorage");
+            promiseJSON(json, length, begin)
+                .done(function(data){
+                    loadedWines = getWinesFromData(data);
+                    var string = JSON.stringify(data);
+                    localStorage.setItem(storagename, string);
+                    console.log("Done getting 100 wines for localstorage");
+                    def.resolve(loadedWines);
+                })
+                .fail(function(){
+                    console.log("Problem when trying to get 100 wines.");
+                    def.reject();
+                });
+
+        }
+    }
+    return def.promise();
+}
+function addWinesToStorage(storagename, json, begin, length){
+    var def = $.Deferred();
+
+    var loadedWines = [];
+    //check for cookies
+    if(typeof(Storage) !== "undefined") {
+        // Code for localStorage/sessionStorage.
+
+        if(localStorage.getItem(storagename)){
+            console.log("Getting 100 wines for localstorage");
+            promiseJSON(json, length, begin)
+                .done(function(data){
+                    //loadedWines = getWinesFromData(JSON.parse(localStorage.getItem(storagename)));
+                    //loadedWines.concat(getWinesFromData(data));
+                    var string = JSON.stringify(JSON.parse(localStorage.getItem(storagename)).concat(data));
+                    localStorage.setItem(storagename, string);
+                    console.log("Done getting 100 wines for localstorage");
+                    console.log(JSON.parse(localStorage.getItem(storagename)).length);
+                    loadedWines = getWinesFromData(JSON.parse(string));
+                    console.log(loadedWines);
+                    def.resolve(loadedWines);
+                })
+                .fail(function(){
+                    console.log("Problem when trying to get 100 wines.");
+                    def.reject();
+                });
+        }
+    }
+
+    return def.promise();
+}
+function getWinesFromData(list){
+    var wines = [];
+    for (i = 0; i < list.length; i++) {
+        try {
+            var value = list[i];
+            var w = new Wijn(value.Id, value.Name, value.Url, value.Appellation.Name, value.Appellation.Region.Name, value.Labels[0].Url, value.Varietal.Name, value.Varietal.WineType.Name, value.Vineyard.Name, value.Vineyard.ImageUrl, value.Community.Reviews.HighestScore, value.Ratings.HighestScore, value.PriceRetail, value.ProductAttributes);
+            wines.push(w);
+        }catch(err){
+            console.log(err);
+        }
+
+    }
+    return wines;
 }

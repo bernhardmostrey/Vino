@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <title></title>
     <!--<link href="css/bootstrap.min.css" rel="stylesheet" />-->
-    <link href="../../../css/style.css" rel="stylesheet"/>
+    <link href="../css/style.css" rel="stylesheet"/>
     <link rel="stylesheet" href="http://use.typekit.net/c/18eb21/1w;brandon-grotesque,2,Y2h:P:i1,Y2g:P:n1,Y2j:P:n3,Y2n:P:n5;open-sans,2,VvG:P:i3,VvD:P:i4,VvF:P:n3,VvH:P:n4/d?3bb2a6e53c9684ffdc9a9bf61f5b2a62850218b0182b3a8f955d7ad2db6645a15a2fece75238ea26f1d85c9a1cbc76cb00e4efb7e79ecf0958e13855066b3466b2732dad8957bb80765959e885ec08226954a671c7986d991f797e750d51ea638e35088bc259d167bb">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
 </head>
 <body ng-app="app" ng-controller="BrowseController" ng-cloak>
@@ -15,10 +16,10 @@
         <h1>Wijn</h1>
         <nav>
             <ul>
-                <li><a href="">Home</a></li>
-                <li><a href="src/app/browse">Browse</a></li>
-                <li><a href="src/app/timeline">Timeline</a></li>
-                <li><a href="src/app/map">Map</a></li>
+                <li><a href="../">Home</a></li>
+                <li><a href=".">Browse</a></li>
+                <li><a href="../timeline">Timeline</a></li>
+                <li><a href="../map">Map</a></li>
             </ul>
         </nav>
     </header>
@@ -29,20 +30,30 @@
     </div>
 
     <div class="browse">
-
-        <div class="filters">
-            <ul>
-                <li>Sort by Popularity</li>
-                <li>Sort by Rating</li>
-                <li></li>
-            </ul>
+        <div class="left">
+            <div class="filters">
+                <ul>
+                    <li>Sort by Popularity</li>
+                    <li>Sort by Rating</li>
+                    <li></li>
+                </ul>
+            </div>
+            <div class="comparer">
+                <h3>Vergelijklijst</h3>
+                <ul>
+                    <li ng-repeat="w in compareList">
+                        <h4>{{w.Name}}</h4>
+                        <button ng-click="removeFromCompare(w, $event)"><i class="fa fa-minus fa-lg"></i></button>
+                    </li>
+                </ul>
+            </div>
         </div>
 
+
+
         <div class="list">
-            <div class="loader-div"><span class="loader"><span class="loader-inner"></span></span></div>
 
 
-        <ul>
             <button ng-disabled="currentPage == 0" ng-click="previousPage()">
                 Previous
             </button>
@@ -50,18 +61,23 @@
             <button ng-click="nextPage()">
                 Next
             </button>
+        <ul>
+            <div class="loader-div"><span class="loader"><span class="loader-inner"></span></span></div>
             <li ng-repeat="w in browseList | orderBy: sortOrder">
-                <div class="img"><img src="{{w.ImageUrl}}" /></div>
+                <div class="img"><img fallback-src="{{w.labelUrl}}" src="{{w.ImageUrl}}" /></div>
                 <div class="details">
                     <h2>{{w.Name}}</h2>
-                    <div class="attributes"><h3 ng-repeat="a in w.Attributes">{{a.Name.replace('&AMP;', '&');}}</h3></div>
+                    <div class="attributes"><h3 ng-repeat="a in w.Attributes">{{a.Name}}</h3></div>
                     <p>Rating: {{w.highestReview}}</p>
                 </div>
                 <div class="actions">
                     <h2>{{w.PriceRetail}}</h2>
-                    <p>+</p>
+                    <button ng-if="compareList.indexOf(w) >= 0" ng-click="addToCompare(w, $event)" disabled><i class="fa fa-plus fa-lg"></i></button>
+                    <button ng-if="!(compareList.indexOf(w) >= 0)" ng-click="addToCompare(w, $event)"><i class="fa fa-plus fa-lg"></i></button>
                 </div>
             </li>
+
+        </ul>
             <button ng-disabled="currentPage == 0" ng-click="previousPage()">
                 Previous
             </button>
@@ -69,8 +85,6 @@
             <button ng-click="nextPage()">
                 Next
             </button>
-        </ul>
-
         </div>
     </div>
 
@@ -83,15 +97,15 @@
 </footer>
 
 
-<script src="../../../scripts/jquery-1.11.1.min.js"></script>
-<script src="../../../scripts/angular.js"></script>
-<script src="../../../scripts/angular-animate.min.js"></script>
+<script src="../scripts/jquery-1.11.1.min.js"></script>
+<script src="../scripts/angular.js"></script>
+<script src="../scripts/angular-animate.min.js"></script>
 <!--<script src="scripts/bootstrap.min.js"></script>-->
 <!--<script src="scripts/ui-bootstrap-0.9.0.min.js"></script>-->
 <!--<script src="scripts/ui-bootstrap-tpls-0.12.0.min.js"></script>-->
-<script src="../../../src/app/app.js"></script>
+<script src="../src/app/app.js"></script>
 
 <script src="BrowseController.js"></script>
-<script src="../../../src/app/shared/Wine.js"></script>
+<script src="../src/app/shared/Wine.js"></script>
 </body>
 </html>

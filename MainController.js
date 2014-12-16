@@ -3,10 +3,29 @@
  */
 app.controller("MainController", function($scope) {
 
+    var loadedWines = [];
+    var promise = checkStorage("wines", jsonPopular+catRedWhiteRose, 0, 100);
+    promise.done(function(data){
+        loadedWines = data;
+        //wel cookies load page
+        if(loadedWines.length > 0){
+            $scope.top4 = [];
+            $scope.top4 = loadedWines.slice(0, 4);
+            hideClass(".top4 .loader-div");
+            setTimeout(function(){showClass(".top4 ul");}, 500);
+        }
+    });
+
+
+
+
+
+
+
     //$scope.hideContainer = true;
     //$scope.fullLoader = true;
 
-    $scope.offlineMode = false;
+    /*$scope.offlineMode = false;
     if($scope.offlineMode == true){
         //Offline
         console.log("offline");
@@ -49,7 +68,7 @@ app.controller("MainController", function($scope) {
 
 
     $scope.error =  "";
-    $scope.big = true;
+    $scope.big = true;*/
 });
 
 function getTop4(list){
@@ -68,3 +87,4 @@ function getTop4(list){
     }
     return top4;
 }
+

@@ -58,15 +58,16 @@ p {
 
 header {
     overflow: hidden;
-    padding: 20px;
+    padding: 0px 20px;
 }
 
 header > h1 {
     float: left;
+    margin: 20px 0px;
 }
 header > nav {
     float: right;
-    margin-top: 50px;
+    margin-top: 40px;
 }
 header > nav > ul {
     list-style: none;
@@ -87,11 +88,11 @@ header > nav > ul li a {
 
 footer {
     color: #efefef;
-    height: 120px;
+    height: 80px;
     background: #372c26;
 }
 footer > p {
-    padding-top: 50px;
+    padding-top: 30px;
 }
 
 .big {
@@ -112,7 +113,7 @@ footer > p {
     height: 400px;
     overflow: hidden;
     position: relative;
-    margin: 20px 0px;
+    margin: 0px;
 }
 .carousel img {
     width: 100%;
@@ -146,59 +147,141 @@ footer > p {
     overflow: hidden;
     margin: 20px;
 }
-.browse .list {
+.browse > .left {
+    float: left;
+    width: 260px;
+}
+.browse .filters {
+}
+.browse .filters > ul {
+
+}
+.browse .filters > ul li {
+    text-align: left;
+    background-color: #D2312B;
+    margin: 10px;
+    padding: 2px 12px;
+    font-size: 12px;
+    color: #fff;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.browse > .list {
     width: 800px;
     float: right;
     min-height: 966px;
     position: relative;
 }
-.browse .list  > ul {
+.browse > .list  > ul {
 list-style: none;
-    display: none;
+    min-height: 2050px;
 }
-.browse .list  > ul li {
+.browse > .list  > ul li {
     overflow: hidden;
 }
-.browse .list  > ul li > div.img {
+.browse > .list  > ul li > div.img {
     float: left;
     width: 150px;
 }
-.browse .list  > ul li > div.img > img {
+.browse > .list  > ul li > div.img > img {
 
     max-height: 100px;
 }
-.browse .list  > ul li > div.details {
+.browse > .list  > ul li > div.details {
 float: left;
     margin: 0px 30px;
     text-align: left;
 }
-.browse .list  > ul li > div.details > h2 {
+.browse > .list  > ul li > div.details > h2 {
     font-size: 18px;
     margin: 0px;
 }
-.browse .list  > ul li > div.details > div.attributes {
+.browse > .list  > ul li > div.details > div.attributes {
     overflow: hidden;
 }
-.browse .list  > ul li > div.details > div.attributes > h3 {
-    font-size: 12px;
-    margin: 0;
+.browse > .list  > ul li > div.details > div.attributes > h3 {
+    font-size: 11px;
+    margin: 0px 10px 0px 0px;
     float: left;
+    text-decoration: underline;
 }
-.browse .list  > ul li > div.details > p {
+.browse > .list  > ul li > div.details > p {
     font-size: 14px;
     margin: 0;
 }
-.browse .list  > ul li > div.actions {
+.browse > .list  > ul li > div.actions {
     float: right;
     width: 150px;
 }
-.browse .list  > ul li > div.actions > h2 {
+.browse > .list  > ul li > div.actions > h2 {
     font-size: 24px;
     margin: 0;
 }
-.browse .list  > ul li > div.actions > p {
+.browse > .list  > ul li > div.actions > button {
+    font-family: inherit;
+    padding: .5em 1em;
+    color: rgba(0,0,0,.8);
+    border: 0 rgba(0,0,0,0);
+    background-color: #E6E6E6;
+    text-decoration: none;
+    border-radius: 2px;
+}
+.browse > .list  > ul li > div.actions > button:disabled {
+    font-family: inherit;
+    padding: .5em 1em;
+    color: rgba(129, 129, 129, 0.80);
+    border: 0 rgba(0,0,0,0);
+    background-color: #f3f3f3;
+    text-decoration: none;
+    border-radius: 2px;
+}
+
+
+.browse .comparer {
+    background: #fff;
+    border: 1px solid #787878;
+    border-radius: 2px;
+    padding: 10px;
+}
+.browse .comparer > h3 {
 
 }
+.browse .comparer > ul {
+
+}
+.browse .comparer > ul li {
+    list-style: none;
+    overflow: hidden;
+    text-align: left;
+}
+.browse .comparer > ul li h4 {
+    font-size: 10px;
+    float: left;
+    max-width: 200px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.browse .comparer  > ul li button {
+    font-family: inherit;
+    padding: .5em 1em;
+    color: rgba(0,0,0,.8);
+    border: 0 rgba(0,0,0,0);
+    background-color: #E6E6E6;
+    text-decoration: none;
+    border-radius: 2px;
+    float: right;
+}
+.browse .comparer  > ul li button:disabled {
+    font-family: inherit;
+    padding: .5em 1em;
+    color: rgba(129, 129, 129, 0.80);
+    border: 0 rgba(0,0,0,0);
+    background-color: #f3f3f3;
+    text-decoration: none;
+    border-radius: 2px;
+}
+
 .timeline-div::-webkit-scrollbar{
     background-color: rgba(210, 49, 43, 0.5);
     height: 20px;
@@ -248,6 +331,11 @@ float: left;
     font-size: 10px;
 }
 
+#map {
+    height: 100%;
+    margin-bottom: -14px;
+}
+
 .loader-div {
     text-align: center;
     /* margin: 20px; */
@@ -256,7 +344,7 @@ float: left;
     left: 0;
     bottom: 0;
     right: 0;
-    background-color: #D2312B;
+    background-color: #f3f3f3;
 
 }
 .loader {
@@ -264,9 +352,9 @@ float: left;
     width: 30px;
     height: 30px;
     position: absolute;
-    margin-top: 30px;
+    margin-top: 50px;
     /*border: 4px solid #D2312B;*/
-    border: 4px solid #fefefe;
+    border: 4px solid #D2312B;
     /*top: 50%;*/
     animation: loader 4s infinite ease;
     -webkit-animation: loader 4s infinite ease;
@@ -277,7 +365,7 @@ float: left;
     display: inline-block;
     width: 100%;
     /*background-color: #D2312B;*/
-    background-color: #fefefe;
+    background-color: #D2312B;
     animation: loader-inner 4s infinite ease-in;
     -webkit-animation: loader-inner 4s infinite ease-in;
 }
