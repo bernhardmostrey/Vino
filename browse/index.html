@@ -46,10 +46,70 @@
                         <button ng-click="removeFromCompare(w, $event)"><i class="fa fa-minus fa-lg"></i></button>
                     </li>
                 </ul>
+                <button ng-click="showCompareBig()">Show details</button>
             </div>
         </div>
 
+        <div class="compare-big">
+            <ul>
+                <li ng-repeat="w in compareList">
+                    <div class="img"><img fallback-src="{{w.labelUrl}}" src="{{w.ImageUrl}}" /></div>
 
+                    <div class="property">
+                        <p>Appellation</p>
+                        <div class="value"><p>{{w.AppellationName}}</p></div>
+                    </div>
+
+                    <div class="property">
+                        <p>Region</p>
+                        <div class="value"><p>{{w.RegionName()}}</p></div>
+                    </div>
+
+                    <div class="property">
+                        <p>Year</p>
+                        <div class="value"><p>{{w.Year}}</p></div>
+                    </div>
+
+                    <div class="property">
+                        <p>Varietal</p>
+                        <div class="value"><p>{{w.Varietal}}</p></div>
+                    </div>
+
+                    <div class="property">
+                        <p>WineType</p>
+                        <div class="value"><p>{{w.WineType}}</p></div>
+                    </div>
+
+                    <div class="property">
+                        <p>VineyardName</p>
+                        <div class="value"><p>{{w.VineyardName}}</p></div>
+                    </div>
+
+                    <div class="property">
+                        <p>HighestReview</p>
+                        <div class="value"><p>{{w.HighestReview}}</p></div>
+                    </div>
+
+                    <div class="property">
+                        <p>HighestRating</p>
+                        <div class="value"><p>{{w.HighestRating}}</p></div>
+                    </div>
+
+                    <div class="property">
+                        <p>PriceRetail</p>
+                        <div class="value"><p>{{w.PriceRetail}}</p></div>
+                    </div>
+
+                    <div class="property">
+                        <p>Attributes</p>
+                        <div class="value"><p ng-repeat="a in w.Attributes">{{a.Name}}</p></div>
+                    </div>
+
+                    <button ng-click="removeFromCompare(w, $event)"><i class="fa fa-minus fa-lg"></i></button>
+                </li>
+            </ul>
+            <button ng-click="hideCompareBig()"><i class="fa fa-close fa-lg"></i></button>
+        </div>
 
         <div class="list">
 

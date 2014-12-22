@@ -281,6 +281,53 @@ float: left;
     text-decoration: none;
     border-radius: 2px;
 }
+.browse .compare-big {
+    position: fixed;
+    width: 1000px;
+    background-color: #FFF;
+    border: 1px solid #262626;
+    z-index: 1000;
+    top: 50%;
+    left: 50%;
+    margin-left: -500px;
+    margin-top: -250px;
+    height: 500px;
+    display: none;
+}
+.browse .compare-big > ul {
+list-style: none;
+}
+.browse .compare-big > ul li {
+    float: left;
+    width: 280px;
+    min-height: 200px;
+    padding: 20px;
+}
+
+.browse .compare-big > ul li .property {
+    overflow: hidden;
+    height: 50px;
+}
+.browse .compare-big > ul li .property > p {
+    float: left;
+    border: 1px solid #262626;
+    width: 140px;
+    text-align: left;
+    padding: 10px;
+    font-size: 14px;
+    margin: 0;
+}
+.browse .compare-big > ul li .property .value {
+    float: right;
+    width: 110px;
+    text-align: right;
+    padding: 10px;
+    border: 1px solid #262626;
+}
+.browse .compare-big > ul li .property .value > p {
+    font-size: 14px;
+    margin: 0;
+}
 
 .timeline-div::-webkit-scrollbar{
     background-color: rgba(210, 49, 43, 0.5);

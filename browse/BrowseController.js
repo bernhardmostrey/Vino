@@ -42,6 +42,13 @@ app.controller("BrowseController", function($scope) {
         }
     };
 
+    $scope.hideCompareBig = function(){
+        hideClass(".compare-big");
+    };
+    $scope.showCompareBig = function(){
+        showClass(".compare-big");
+    };
+
 
 
     //$scope.hideContainer = true;
