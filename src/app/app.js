@@ -93,6 +93,21 @@ function promiseJSON(json, size, offset){
     });
     return defer.promise();
 }
+function promiseJSON(json){
+    var defer = $.Deferred();
+    var promise = $.getJSON(json).error(function() { defer.reject(); });
+    $.when(promise).done(function(){
+        if(promise.responseJSON.Products.List.length >= 1){
+            defer.resolve(promise.responseJSON.Products.List);
+        }else{
+            defer.reject();
+        }
+    });
+    $.when(promise).fail(function(){
+        defer.reject();
+    });
+    return defer.promise();
+}
 
 var offlinePopular = [];
 function promiseJSONOffline(json){

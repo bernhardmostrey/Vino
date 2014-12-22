@@ -35,7 +35,7 @@
                 <ul>
                     <li>Sort by Popularity</li>
                     <li>Sort by Rating</li>
-                    <li></li>
+                    <li><form ng-submit="search()"><input type="text" id="search" /><input type="submit" value="Search" /></form></li>
                 </ul>
             </div>
             <div class="comparer">
@@ -51,57 +51,89 @@
         </div>
 
         <div class="compare-big">
+            <div class="properties">
+                <div class="property">
+                    <p>Appellation</p>
+                </div>
+
+                <div class="property">
+                    <p>Region</p>
+                </div>
+
+                <div class="property">
+                    <p>Year</p>
+                </div>
+
+                <div class="property">
+                    <p>Varietal</p>
+                </div>
+
+                <div class="property">
+                    <p>WineType</p>
+                </div>
+
+                <div class="property">
+                    <p>VineyardName</p>
+                </div>
+
+                <div class="property">
+                    <p>HighestReview</p>
+                </div>
+
+                <div class="property">
+                    <p>HighestRating</p>
+                </div>
+
+                <div class="property">
+                    <p>PriceRetail</p>
+                </div>
+
+                <div class="property">
+                    <p>Attributes</p>
+                </div>
+            </div>
             <ul>
                 <li ng-repeat="w in compareList">
-                    <div class="img"><img fallback-src="{{w.labelUrl}}" src="{{w.ImageUrl}}" /></div>
 
+                    <div class="img"><img fallback-src="{{w.labelUrl}}" src="{{w.ImageUrl}}" /></div>
+                    <h4>{{w.Name}}</h4>
                     <div class="property">
-                        <p>Appellation</p>
                         <div class="value"><p>{{w.AppellationName}}</p></div>
                     </div>
 
                     <div class="property">
-                        <p>Region</p>
-                        <div class="value"><p>{{w.RegionName()}}</p></div>
+                        <div class="value"><p>{{w.RegionName}}</p></div>
                     </div>
 
                     <div class="property">
-                        <p>Year</p>
                         <div class="value"><p>{{w.Year}}</p></div>
                     </div>
 
                     <div class="property">
-                        <p>Varietal</p>
                         <div class="value"><p>{{w.Varietal}}</p></div>
                     </div>
 
                     <div class="property">
-                        <p>WineType</p>
                         <div class="value"><p>{{w.WineType}}</p></div>
                     </div>
 
                     <div class="property">
-                        <p>VineyardName</p>
                         <div class="value"><p>{{w.VineyardName}}</p></div>
                     </div>
 
                     <div class="property">
-                        <p>HighestReview</p>
                         <div class="value"><p>{{w.HighestReview}}</p></div>
                     </div>
 
                     <div class="property">
-                        <p>HighestRating</p>
                         <div class="value"><p>{{w.HighestRating}}</p></div>
                     </div>
 
                     <div class="property">
-                        <p>PriceRetail</p>
                         <div class="value"><p>{{w.PriceRetail}}</p></div>
                     </div>
 
                     <div class="property">
-                        <p>Attributes</p>
                         <div class="value"><p ng-repeat="a in w.Attributes">{{a.Name}}</p></div>
                     </div>
 
@@ -123,7 +155,7 @@
             </button>
         <ul>
             <div class="loader-div"><span class="loader"><span class="loader-inner"></span></span></div>
-            <li ng-repeat="w in browseList | orderBy: sortOrder">
+            <li ng-if="!searching" ng-repeat="w in browseList | orderBy: sortOrder">
                 <div class="img"><img fallback-src="{{w.labelUrl}}" src="{{w.ImageUrl}}" /></div>
                 <div class="details">
                     <h2>{{w.Name}}</h2>
@@ -132,10 +164,24 @@
                 </div>
                 <div class="actions">
                     <h2>{{w.PriceRetail}}</h2>
-                    <button ng-if="compareList.indexOf(w) >= 0" ng-click="addToCompare(w, $event)" disabled><i class="fa fa-plus fa-lg"></i></button>
-                    <button ng-if="!(compareList.indexOf(w) >= 0)" ng-click="addToCompare(w, $event)"><i class="fa fa-plus fa-lg"></i></button>
+                    <button ng-if="compareList.indexOf(w) >= 0 || compareList.length >= 3" ng-click="addToCompare(w, $event)" disabled><i class="fa fa-plus fa-lg"></i></button>
+                    <button ng-if="!(compareList.indexOf(w) >= 0) && compareList.length < 3" ng-click="addToCompare(w, $event)"><i class="fa fa-plus fa-lg"></i></button>
                 </div>
             </li>
+            <li id="searchResults" ng-if="searching" ng-repeat="w in searchList">
+                <div class="img"><img fallback-src="{{w.labelUrl}}" src="{{w.ImageUrl}}" /></div>
+                <div class="details">
+                    <h2>{{w.Name}}</h2>
+                    <div class="attributes"><h3 ng-repeat="a in w.Attributes">{{a.Name}}</h3></div>
+                    <p>Rating: {{w.highestReview}}</p>
+                </div>
+                <div class="actions">
+                    <h2>{{w.PriceRetail}}</h2>
+                    <button ng-if="compareList.indexOf(w) >= 0 || compareList.length >= 3" ng-click="addToCompare(w, $event)" disabled><i class="fa fa-plus fa-lg"></i></button>
+                    <button ng-if="!(compareList.indexOf(w) >= 0) && compareList.length < 3" ng-click="addToCompare(w, $event)"><i class="fa fa-plus fa-lg"></i></button>
+                </div>
+            </li>
+            <p ng-if="error">{{errorMessage}}</p>
 
         </ul>
             <button ng-disabled="currentPage == 0" ng-click="previousPage()">

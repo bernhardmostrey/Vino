@@ -7,7 +7,13 @@ app.controller("BrowseController", function($scope) {
     $scope.currentPage = 0;
     $scope.pageSize = 20;
 
-    //var loadedWines = checkStorage("wines", jsonPopular+catRedWhiteRose, 0, 100);
+
+    $scope.compareList = [];
+    var promise = checkCompareStorage($scope.compareList, false);
+    promise.done(function(compare){
+        $scope.compareList = compare;
+    });
+
     var loadedWines = [];
     var promise = checkStorage("wines", jsonPopular+catRedWhiteRose, 0, 100);
     promise.done(function(data){
@@ -21,115 +27,44 @@ app.controller("BrowseController", function($scope) {
                 })
             });
             $scope.browseList = list;
-            /*$(".browse .list img").each(function() {
-                console.log("each"+this.src);
-            });*/
-            //$scope.$apply();
             hideClass(".browse .list ul .loader-div");
             setTimeout(function(){showClass(".browse .list ul li");}, 500);
         }
     });
-    //wel cookies load page
 
-    $scope.compareList = [];
     $scope.addToCompare = function(w, $event){
         $scope.compareList.push(w);
+        var promise = checkCompareStorage($scope.compareList, false);
+        promise.done(function(compare){
+            $scope.compareList = compare;
+        });
+
     };
     $scope.removeFromCompare = function(w, $event){
+
         var index = $scope.compareList.indexOf(w);
         if (index > -1) {
             $scope.compareList.splice(index, 1);
+            var promise = checkCompareStorage($scope.compareList, true);
+            promise.done(function(compare){
+                $scope.compareList = compare;
+            });
         }
     };
 
     $scope.hideCompareBig = function(){
         hideClass(".compare-big");
+        showClass(".list");
     };
     $scope.showCompareBig = function(){
+        hideClass(".list");
         showClass(".compare-big");
+
     };
-
-
-
-    //$scope.hideContainer = true;
-
-
-    /*$scope.browseList = [];
-
-    $scope.offlineMode = false;
-
-
-    if($scope.offlineMode == true){
-        //Offline
-
-        var promise = promiseJSONOffline("../../../scripts/json/popular.json");
-        promise.done(function(data){
-            //console.log(data);
-            offlinePopular = data;
-            //console.log(offlinePopular);
-            //$scope.$apply();
-            //setTimeout(function(){$scope.hideContainer = false;$scope.$apply();}, 500);
-
-            $scope.browseList = [];
-
-            //console.log(offlinePopular);
-            $scope.browseList = getCertainWines(offlinePopular, $scope.currentPage*10, $scope.pageSize);
-            console.log($scope.browseList);
-
-            $scope.$apply();
-        });
-        promise.fail(function(){
-            console.log("Something went wrong with json: "+json);
-        });
-    }else{
-        //ONLINE
-
-        promiseJSON(jsonPopular+catRedWhiteRose, $scope.pageSize, $scope.currentPage*10)
-            .done(function(data){
-
-
-                $scope.browseList = getCertainWines(data, 0, $scope.pageSize);
-                $scope.$apply();
-
-            })
-            .fail(function(){
-                console.log("Something went wrong with json: "+json);
-            });
-    }
-
-    $scope.currentPage = 0;
-    $scope.pageSize = 10;*/
-
-    /*$scope.fullLoader = false;
-    //$scope.$apply();
-    setInterval(function(){$scope.hideContainer = false;$scope.$apply();}, 500);*/
-
-
     $scope.nextPage = function(){
-        /*$scope.currentPage++;
-        hideClass(".browse ul");
-        showClass(".browse .loader-div");
-        if($scope.offlineMode == true)$scope.browseList = getCertainWines(offlinePopular, $scope.currentPage*10, $scope.pageSize);hideClass(".browse .loader-div");setInterval(function(){showClass(".browse ul");}, 1000);
-        if($scope.offlineMode == false){
-            promiseJSON(jsonPopular+catRedWhiteRose, $scope.pageSize, $scope.currentPage*10)
-                .done(function(data){
-                    $scope.browseList = getCertainWines(data, 0, $scope.pageSize);
-                    $scope.$apply();
-
-
-                })
-                .fail(function(){
-                    console.log("Something went wrong with json: "+json);
-                });
-        }*/
-
-
         $scope.currentPage++;
 
-
-
         var needed = ($scope.currentPage*$scope.pageSize)+$scope.pageSize;
-        //console.log("current: "+loadedWines.length+" needed: "+needed);
         if(loadedWines.length >= needed){
             $scope.browseList = loadedWines.slice($scope.currentPage*$scope.pageSize,needed);
         }else{
@@ -155,27 +90,10 @@ app.controller("BrowseController", function($scope) {
     };
 
     $scope.previousPage = function(){
-        /*$scope.currentPage--;
-        hideClass(".browse ul");
-        showClass(".browse .loader-div");
-        if($scope.offlineMode == true)$scope.browseList = getCertainWines(offlinePopular, $scope.currentPage*10, $scope.pageSize);hideClass(".browse .loader-div");setInterval(function(){showClass(".browse ul");}, 1000);
-        if($scope.offlineMode == false){
-            promiseJSON(jsonPopular+catRedWhiteRose, $scope.pageSize, $scope.currentPage*10)
-                .done(function(data){
-                    $scope.browseList = getCertainWines(data, 0, $scope.pageSize);
-                    $scope.$apply();
-                })
-                .fail(function(){
-                    console.log("Something went wrong with json: "+json);
-                });
-        }*/
         $scope.currentPage--;
-        //console.log("current: "+loadedWines.length+" needed: "+needed);
         var needed = ($scope.currentPage*$scope.pageSize)+$scope.pageSize;
         if(loadedWines.length > needed){
             $scope.browseList = loadedWines.slice($scope.currentPage*$scope.pageSize,needed);
-            //console.log($scope.browseList);
-
         }else{
             hideClass(".browse .list ul li");
             showClass(".browse .list ul .loader-div");
@@ -189,9 +107,41 @@ app.controller("BrowseController", function($scope) {
                 hideClass(".browse .list ul .loader-div");
                 setTimeout(function(){showClass(".browse .list ul li");}, 500);
             });
-
         }
     };
+
+
+    $scope.searchList = [];
+    $scope.searching = false;
+    $scope.search = function(){
+        var input = $("#search")[0].value;
+
+        if(input.length > 0){
+            input = input.replace(" ", "+");
+
+            var promise = searchWine(input);
+            promise.done(function(search){
+                $scope.searchList = search;
+                console.log($scope.searchList);
+                $scope.searching = true;
+                $scope.$apply();
+            });
+            promise.fail(function(){
+                $scope.searching = true;
+                $scope.searchList = [];
+
+                $scope.error = true;
+                $scope.errorMessage = "No results were found. :(";
+                $scope.$apply();
+            });
+
+
+        }else{
+            $scope.searching = false;
+        }
+
+
+    }
 
 });
 
@@ -217,3 +167,121 @@ function getCertainWines(list, start, length){
     return result;
 }
 
+/*function checkCompareStorage(currentList, bRemove){
+    var def = $.Deferred();
+
+    var compareList = [];
+    //check for cookies
+    if(typeof(Storage) !== "undefined") {
+        // Code for localStorage/sessionStorage.
+
+        if(localStorage.getItem("compare") && currentList.length == 0 && bRemove == false){
+            compareList = getWinesFromData(JSON.parse(localStorage.getItem("compare")));
+            def.resolve(compareList);
+
+        }else{
+            //store 100 json objects in localstorage
+
+            var currentIDs = "";
+            if(currentList.length > 0){
+
+                angular.forEach(currentList, function(value, key){
+                    currentIDs += value.Id+"+";
+                });
+                currentIDs = currentIDs.substring(0, currentIDs.length-1);
+
+                promiseJSON("http://services.wine.com/api/beta2/service.svc/json/catalog?apikey=21d7fc7d0b855bad2ce0330eaf84bedc&filter=product("+currentIDs+")", currentList.length-1, 0)
+                    .done(function(compare){
+                        compareList = getWinesFromData(compare);
+                        console.log(compareList.length - currentList.length);
+                        if((compareList.length - currentList.length) > 0){
+                            console.log("extra wijn");
+                            compareList.shift();
+                            compare.shift();
+                            console.log(compareList.length - currentList.length);
+                        }
+                        var string = JSON.stringify(compare);
+                        localStorage.setItem("compare", string);
+                        def.resolve(compareList);
+                    })
+                    .fail(function(){
+                        console.log("Problem when storing currentlist");
+                        def.reject();
+                    });
+            }else{
+                localStorage.setItem("compare", "");
+                def.resolve(compareList);
+            }
+        }
+    }
+    return def.promise();
+}*/
+
+function checkCompareStorage(currentList, bRemove){
+    var def = $.Deferred();
+
+    var compareList = [];
+    //check for cookies
+    if(typeof(Storage) !== "undefined") {
+        // Code for localStorage/sessionStorage.
+
+        if(localStorage.getItem("compare") && currentList.length == 0 && bRemove == false){
+            compareList = getWinesFromData(JSON.parse(localStorage.getItem("compare")));
+            def.resolve(compareList);
+
+        }else{
+            //store 100 json objects in localstorage
+
+            var currentIDs = "";
+            if(currentList.length > 0){
+
+                angular.forEach(currentList, function(value, key){
+                    currentIDs += value.Id+"+";
+                });
+                currentIDs = currentIDs.substring(0, currentIDs.length-1);
+
+                promiseJSON("http://services.wine.com/api/beta2/service.svc/json/catalog?apikey=21d7fc7d0b855bad2ce0330eaf84bedc&filter=product("+currentIDs+")")
+                    .done(function(compare){
+                        compareList = getWinesFromData(compare);
+                        console.log(compareList.length - currentList.length);
+                        if((compareList.length - currentList.length) > 0){
+                            console.log("extra wijn");
+                            compareList.shift();
+                            compare.shift();
+                            console.log(compareList.length - currentList.length);
+                        }
+                        var string = JSON.stringify(compare);
+                        localStorage.setItem("compare", string);
+                        def.resolve(compareList);
+                    })
+                    .fail(function(){
+                        console.log("Problem when storing currentlist");
+                        def.reject();
+                    });
+            }else{
+                localStorage.setItem("compare", "");
+                def.resolve(compareList);
+            }
+        }
+    }
+    return def.promise();
+}
+
+function searchWine(queryString){
+    var def = $.Deferred();
+
+    var searchList = [];
+
+                promiseJSON("http://services.wine.com/api/beta2/service.svc/json/catalog?apikey=21d7fc7d0b855bad2ce0330eaf84bedc&search="+queryString)
+                    .done(function(search){
+                        searchList = getWinesFromData(search);
+                        def.resolve(searchList);
+                    })
+                    .fail(function(){
+                        console.log("Problem when searching");
+                        def.reject();
+                    });
+
+
+    return def.promise();
+}
