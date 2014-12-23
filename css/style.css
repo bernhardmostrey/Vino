@@ -133,6 +133,9 @@ font-size: 3vw;
 .top4 > ul li h3 {
     cursor: pointer;
 }
+.top4 > ul li h3:hover {
+    color: #a94442;
+}
 
 .browse {
     overflow: hidden;
@@ -208,6 +211,9 @@ list-style: none;
 .browse > .list  > ul li > div.details > h2 {
     margin: 5px 0px;
     cursor: pointer;
+}
+.browse > .list > ul li > div.details > h2:hover {
+    color: #a94442;
 }
 .browse > .list  > ul li > div.details > div.attributes {
     overflow: hidden;
@@ -471,6 +477,57 @@ overflow: hidden;
     position: absolute;
     top: 0;
     right: 0;
+}
+.wineDetails button:hover {
+    cursor: pointer;
+}
+
+/*  LABEL PAGE  */
+#label-wrapper {
+    overflow: hidden;
+    clear: both;
+}
+#label {
+    position: relative;
+    width: 80%;
+    float: left;
+}
+#label > img {
+
+}
+#label .object {
+    border: 3px solid red;
+    position: absolute;
+}
+#label .object:hover {
+    background-color: rgba(169, 68, 66, 0.36);
+    cursor: pointer;
+}
+#label .object.active {
+    background-color: rgba(169, 68, 66, 0.36);
+}
+#label-wrapper #options {
+    float: right;
+    width: 16%;
+    margin: 2%;
+    text-align: left;
+}
+#label-wrapper #options > h2 {
+    text-align: left;
+}
+#label-wrapper #options > ul {
+    list-style: none;
+    background-color: #EDEDED;
+    padding: 5%;
+}
+#label-wrapper #options > ul li {
+
+}
+#label-wrapper #options > ul li > input {
+    margin: 5%;
+}
+#label-wrapper #options > ul li > input::before {
+
 }
 
 .loader-div {

@@ -27,6 +27,7 @@ app.controller("BrowseController", function($scope) {
                 })
             });
             $scope.browseList = list;
+            $scope.$apply();
             hideClass(".browse .list ul .loader-div");
             setTimeout(function(){showClass(".browse .list ul li");}, 500);
         }
@@ -49,7 +50,6 @@ app.controller("BrowseController", function($scope) {
             var promise = checkCompareStorage($scope.compareList, true);
             promise.done(function(compare){
                 $scope.compareList = compare;
-                $scope.$apply();
             });
         }
     };
@@ -59,8 +59,11 @@ app.controller("BrowseController", function($scope) {
         showClass(".list");
     };
     $scope.showCompareBig = function(){
-        hideClass(".list");
-        showClass(".compare-big");
+        if($scope.compareList.length > 0){
+            hideClass(".list");
+            showClass(".compare-big");
+        }
+
 
     };
     $scope.nextPage = function(){
@@ -181,56 +184,6 @@ function getCertainWines(list, start, length){
     return result;
 }
 
-/*function checkCompareStorage(currentList, bRemove){
-    var def = $.Deferred();
-
-    var compareList = [];
-    //check for cookies
-    if(typeof(Storage) !== "undefined") {
-        // Code for localStorage/sessionStorage.
-
-        if(localStorage.getItem("compare") && currentList.length == 0 && bRemove == false){
-            compareList = getWinesFromData(JSON.parse(localStorage.getItem("compare")));
-            def.resolve(compareList);
-
-        }else{
-            //store 100 json objects in localstorage
-
-            var currentIDs = "";
-            if(currentList.length > 0){
-
-                angular.forEach(currentList, function(value, key){
-                    currentIDs += value.Id+"+";
-                });
-                currentIDs = currentIDs.substring(0, currentIDs.length-1);
-
-                promiseJSON("http://services.wine.com/api/beta2/service.svc/json/catalog?apikey=21d7fc7d0b855bad2ce0330eaf84bedc&filter=product("+currentIDs+")", currentList.length-1, 0)
-                    .done(function(compare){
-                        compareList = getWinesFromData(compare);
-                        console.log(compareList.length - currentList.length);
-                        if((compareList.length - currentList.length) > 0){
-                            console.log("extra wijn");
-                            compareList.shift();
-                            compare.shift();
-                            console.log(compareList.length - currentList.length);
-                        }
-                        var string = JSON.stringify(compare);
-                        localStorage.setItem("compare", string);
-                        def.resolve(compareList);
-                    })
-                    .fail(function(){
-                        console.log("Problem when storing currentlist");
-                        def.reject();
-                    });
-            }else{
-                localStorage.setItem("compare", "");
-                def.resolve(compareList);
-            }
-        }
-    }
-    return def.promise();
-}*/
-
 function checkCompareStorage(currentList, bRemove){
     var def = $.Deferred();
 
@@ -254,7 +207,7 @@ function checkCompareStorage(currentList, bRemove){
                 });
                 currentIDs = currentIDs.substring(0, currentIDs.length-1);
 
-                promiseJSON("http://services.wine.com/api/beta2/service.svc/json/catalog?apikey=21d7fc7d0b855bad2ce0330eaf84bedc&filter=product("+currentIDs+")")
+                promiseJSONDefault("http://services.wine.com/api/beta2/service.svc/json/catalog?apikey=21d7fc7d0b855bad2ce0330eaf84bedc&filter=product("+currentIDs+")")
                     .done(function(compare){
                         compareList = getWinesFromData(compare);
                         console.log(compareList.length - currentList.length);
@@ -286,7 +239,7 @@ function searchWine(queryString){
 
     var searchList = [];
 
-                promiseJSON("http://services.wine.com/api/beta2/service.svc/json/catalog?apikey=21d7fc7d0b855bad2ce0330eaf84bedc&search="+queryString)
+                promiseJSONDefault("http://services.wine.com/api/beta2/service.svc/json/catalog?apikey=21d7fc7d0b855bad2ce0330eaf84bedc&search="+queryString)
                     .done(function(search){
                         searchList = getWinesFromData(search);
                         def.resolve(searchList);

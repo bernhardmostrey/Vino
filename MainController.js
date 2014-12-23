@@ -22,6 +22,7 @@ app.controller("MainController", function($scope) {
     };
     $scope.hideDetails = function(){
         hideClass(".wineDetails");
+        $scope.detailsList = [];
     };
 
 });

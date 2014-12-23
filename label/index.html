@@ -2,52 +2,51 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>Wijn</title>
+    <title>Vino - Label</title>
     <!--<link href="css/bootstrap.min.css" rel="stylesheet" />-->
-    <link href="css/style.css" rel="stylesheet"/>
+    <link href="../css/style.css" rel="stylesheet"/>
     <link rel="stylesheet" href="http://use.typekit.net/c/18eb21/1w;brandon-grotesque,2,Y2h:P:i1,Y2g:P:n1,Y2j:P:n3,Y2n:P:n5;open-sans,2,VvG:P:i3,VvD:P:i4,VvF:P:n3,VvH:P:n4/d?3bb2a6e53c9684ffdc9a9bf61f5b2a62850218b0182b3a8f955d7ad2db6645a15a2fece75238ea26f1d85c9a1cbc76cb00e4efb7e79ecf0958e13855066b3466b2732dad8957bb80765959e885ec08226954a671c7986d991f797e750d51ea638e35088bc259d167bb">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-</head>
-<body ng-app="app" ng-controller="MainController" >
-<!--<div class="loader-div" id="PageLoad"><span class="loader"><span class="loader-inner"></span></span></div>-->
 
-<div class="container wrapper">
+</head>
+<body ng-app="app" ng-controller="BrowseController" ng-cloak>
+
+<div class="container">
     <header>
-        <h1>Wijn</h1>
+        <h1>Vino</h1>
         <nav>
             <ul>
-                <li><a href=".">Home</a></li>
-                <li><a href="browse">Browse</a></li>
-                <li><a href="timeline">Timeline</a></li>
-                <li><a href="map">Map</a></li>
+                <li><a href="../">Home</a></li>
+                <li><a href=".">Browse</a></li>
+                <li><a href="../timeline">Timeline</a></li>
+                <li><a href="../map">Map</a></li>
                 <li><a href="../label">Label Game</a></li>
             </ul>
         </nav>
     </header>
 </div>
-    <div class="carousel">
-        <img src="assets/wineheader.jpg" alt="" />
-    </div>
-
 <div class="container">
-    <div class="big bg-gray">
-        <h1>Ever wondered how other people like your favorite wine?</h1>
-        <h1>So did we!</h1>
+
+    <div id="label-wrapper">
+        <div id="label">
+            <img src="../assets/label.jpg" width="100%"/>
+            <!--<div class="object" style="-->
+            <!--width: 8%;-->
+            <!--height: 7%;-->
+            <!--position: absolute;-->
+            <!--top: 80%;-->
+            <!--left: 30%;-->
+            <!--"></div>-->
+        </div>
+        <div id="options">
+            <ul >
+                <li ng-repeat="o in objects"><input type="radio" ng-click="radioChanged(o.name)" ng-checked="selectedObject.guessedName == o.name" name="object" value="o.name"><label>{{o.name}}</label></li>
+            </ul>
+            <h2>Correct answers: {{numberCorrect}}</h2>
+        </div>
+
     </div>
 
-
-
-    <div class="top4">
-
-        <div class="loader-div"><span class="loader"><span class="loader-inner"></span></span></div>
-        <p ng-show="showTop4Error">{{error}}</p>
-        <ul>
-            <li  ng-repeat="w in top4">
-                <img src="{{w.ImageUrl}}" />
-                <h3 ng-click="addToDetails(w)">{{w.Name}}</h3>
-            </li>
-        </ul>
-    </div>
 
     <div class="wineDetails" ng-repeat="w in detailsList">
         <div class="img"><img fallback-src="{{w.labelUrl}}" src="{{w.ImageUrl}}" /></div>
@@ -112,13 +111,14 @@
 </footer>
 
 
-<script src="scripts/jquery-1.11.1.min.js"></script>
-<script src="scripts/angular.js"></script>
-<script src="scripts/angular-animate.min.js"></script>
-<script src="src/app/app.js"></script>
+<script src="../scripts/jquery-1.11.1.min.js"></script>
+<script src="Game.js"></script>
+<script src="../scripts/angular.js"></script>
+<script src="../scripts/angular-animate.min.js"></script>
+<script src="../src/app/app.js"></script>
 
-<script src="MainController.js"></script>
-<script src="src/app/shared/Wine.js"></script>
+<script src="LabelController.js"></script>
+<script src="../src/app/shared/Wine.js"></script>
 
 </body>
 </html>

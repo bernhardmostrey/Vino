@@ -93,7 +93,7 @@ function promiseJSON(json, size, offset){
     });
     return defer.promise();
 }
-function promiseJSON(json){
+function promiseJSONDefault(json){
     var defer = $.Deferred();
     var promise = $.getJSON(json).error(function() { defer.reject(); });
     $.when(promise).done(function(){
@@ -168,6 +168,7 @@ function checkStorage(storagename, json, begin, length){
         if(localStorage.getItem(storagename) && JSON.parse(localStorage.getItem(storagename).length >= 100)){
 
             loadedWines = getWinesFromData(JSON.parse(localStorage.getItem(storagename)));
+            console.log("just load");
             def.resolve(loadedWines);
 
         }else{
@@ -176,9 +177,10 @@ function checkStorage(storagename, json, begin, length){
             promiseJSON(json, length, begin)
                 .done(function(data){
                     loadedWines = getWinesFromData(data);
+                    console.log(loadedWines.length);
                     var string = JSON.stringify(data);
                     localStorage.setItem(storagename, string);
-                    console.log("Done getting 100 wines for localstorage");
+                    console.log("Done getting "+length+" wines for localstorage"+loadedWines.length);
                     def.resolve(loadedWines);
                 })
                 .fail(function(){
@@ -205,10 +207,12 @@ function addWinesToStorage(storagename, json, begin, length){
                     //loadedWines = getWinesFromData(JSON.parse(localStorage.getItem(storagename)));
                     //loadedWines.concat(getWinesFromData(data));
                     var string = JSON.stringify(JSON.parse(localStorage.getItem(storagename)).concat(data));
+
                     localStorage.setItem(storagename, string);
                     console.log("Done getting 100 wines for localstorage");
                     console.log(JSON.parse(localStorage.getItem(storagename)).length);
                     loadedWines = getWinesFromData(JSON.parse(string));
+                    console.log(JSON.parse(localStorage.getItem(storagename)));
                     console.log(loadedWines);
                     def.resolve(loadedWines);
                 })
@@ -230,6 +234,7 @@ function getWinesFromData(list){
             wines.push(w);
         }catch(err){
             console.log(err);
+            console.log(w);
         }
 
     }
