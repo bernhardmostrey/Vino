@@ -32,12 +32,12 @@
     </header>
 
     <div class="carousel">
-        <img src="https://timmeubanks.files.wordpress.com/2012/03/vena_wine_beauty.jpg" alt="" />
+        <img src="assets/wineheader.jpg" alt="" />
     </div>
 
     <div class="big bg-gray">
-        <h1 ng-show="big">Ever wondered how other people like your favorite wine?</h1>
-        <h1 ng-hide="big">So did we!</h1>
+        <h1>Ever wondered how other people like your favorite wine?</h1>
+        <h1>So did we!</h1>
     </div>
 
 
@@ -49,11 +49,66 @@
         <ul>
             <li  ng-repeat="w in top4">
                 <img src="{{w.ImageUrl}}" />
-                <h3>{{w.Name}}</h3>
+                <h3 ng-click="addToDetails(w)">{{w.Name}}</h3>
             </li>
         </ul>
     </div>
 
+    <div class="wineDetails" ng-repeat="w in detailsList">
+        <div class="img"><img fallback-src="{{w.labelUrl}}" src="{{w.ImageUrl}}" /></div>
+        <h4>{{w.Name}}</h4>
+        <div class="property">
+            <p>Appellation Name</p>
+            <div class="value"><p>{{w.AppellationName}}</p></div>
+        </div>
+
+        <div class="property">
+            <p>Region Name</p>
+            <div class="value"><p>{{w.RegionName}}</p></div>
+        </div>
+
+        <div class="property">
+            <p>Year</p>
+            <div class="value"><p>{{w.Year}}</p></div>
+        </div>
+
+        <div class="property">
+            <p>Varietal</p>
+            <div class="value"><p>{{w.Varietal}}</p></div>
+        </div>
+
+        <div class="property">
+            <p>Winetype</p>
+            <div class="value"><p>{{w.WineType}}</p></div>
+        </div>
+
+        <div class="property">
+            <p>Vineyard</p>
+            <div class="value"><p>{{w.VineyardName}}</p></div>
+        </div>
+
+        <div class="property">
+            <p>Highest Review</p>
+            <div class="value"><p>{{w.HighestReview}}</p></div>
+        </div>
+
+        <div class="property">
+            <p>Highest Rating</p>
+            <div class="value"><p>{{w.HighestRating}}</p></div>
+        </div>
+
+        <div class="property">
+            <p>Price</p>
+            <div class="value"><p>{{w.PriceRetail}}</p></div>
+        </div>
+
+        <div class="property">
+            <p>Attributes</p>
+            <div class="value"><p ng-repeat="a in w.Attributes">{{a.Name}}</p></div>
+        </div>
+
+        <button ng-click="hideDetails()"><i class="fa fa-close fa-lg"></i></button>
+    </div>
 
 </div>
 
@@ -66,5 +121,6 @@
 
 <script src="MainController.js"></script>
 <script src="src/app/shared/Wine.js"></script>
+
 </body>
 </html>

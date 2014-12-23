@@ -14,45 +14,41 @@
 body {
     background-color: #fefefe;
     text-align: center;
-    font-family:open-sans,sans-serif;font-weight:400;font-size:16px;line-height:28px;
+    font-family:open-sans,sans-serif;font-weight:400;
+    font-size:100%;line-height: 1.45;
 }
 
 h1, h2, h3 {
     font-family: brandon-grotesque, sans-serif;
+    line-height: 1.45;
 }
 
 h1 {
-    font-size: 48px;
-    line-height: 60px;
+    font-size: 2vw;
     font-weight: 100;
     margin: 30px 0;
 }
 
 h2 {
-    font-size: 34px;
+    font-size: 1.2vw;
     font-weight: 300;
-    line-height: 42px;
     margin: 25px 0;
 }
 
 h3 {
-    font-size: 16px;
+    font-size: 1vw;
     text-transform: uppercase;
     font-weight: 500;
-    line-height: 20px;
     margin: 15px 0;
 }
 
 p {
-    font-family: open-sans,sans-serif;
-    font-size: 16px;
     font-weight: 100;
-    line-height: 28px;
     margin: 14px 0;
 }
 
 .container {
-    width: 1100px;
+    width: 80%;
     margin: 0 auto;
 }
 
@@ -64,6 +60,7 @@ header {
 header > h1 {
     float: left;
     margin: 20px 0px;
+    font-size: 42px;
 }
 header > nav {
     float: right;
@@ -99,27 +96,21 @@ footer > p {
     padding: 30px;
     margin: 20px 0px;
     position: relative;
-    height: 240px;
-
 }
 .big h1 {
-
+font-size: 3vw;
 }
 .bg-gray {
     background-color: #e7e7e7;
 }
 
 .carousel {
-    height: 400px;
     overflow: hidden;
     position: relative;
     margin: 0px;
 }
 .carousel img {
     width: 100%;
-    position: absolute;
-    left: 0;
-    bottom: -270px;
 }
 .top4 {
     min-height: 218px;
@@ -133,25 +124,44 @@ footer > p {
 }
 .top4 > ul li {
     float: left;
-    width: 265px;
+    width: 25%;
     padding: 20px;
 }
 .top4 > ul li img {
     max-height: 60px;
 }
 .top4 > ul li h3 {
-
+    cursor: pointer;
 }
 
 .browse {
     overflow: hidden;
-    margin: 20px;
+    margin: 20px auto;
+    width: 90%;
 }
 .browse > .left {
     float: left;
-    width: 260px;
+    width: 25%;
+    background-color: #EDEDED;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 .browse .filters {
+}
+.browse .filters form #search {
+    padding: 5px 5px;
+    background-color: rgb(255, 177, 177);
+    border: none;
+    color: #fff;
+    font-size: 14px;
+    margin: 2% 2% 2% 0;
+    width: 80%;
+}
+.browse .filters form button[type=submit]{
+    margin: 2% 2% 2% 0;
+    line-height: 19px;
+    height: 28px;
+    width: 16%;
 }
 .browse .filters > ul {
 
@@ -167,57 +177,59 @@ footer > p {
     cursor: pointer;
 }
 .browse > .list {
-    width: 800px;
+    width: 72%;
     float: right;
     min-height: 966px;
     position: relative;
+    margin-left: 3%;
 }
 .browse > .list  > ul {
 list-style: none;
-    min-height: 2050px;
+    min-height: 1000px;
 }
 .browse > .list  > ul li {
     overflow: hidden;
 }
 .browse > .list  > ul li > div.img {
     float: left;
-    width: 150px;
+    width: 11%;
+    margin: 2%;
 }
 .browse > .list  > ul li > div.img > img {
-
     max-height: 100px;
+    max-width: 100%;
 }
 .browse > .list  > ul li > div.details {
-float: left;
-    margin: 0px 30px;
+    float: left;
+    margin: 0px 5% 0px 0px;
     text-align: left;
+    width: 60%;
 }
 .browse > .list  > ul li > div.details > h2 {
-    font-size: 18px;
-    margin: 0px;
+    margin: 5px 0px;
+    cursor: pointer;
 }
 .browse > .list  > ul li > div.details > div.attributes {
     overflow: hidden;
 }
 .browse > .list  > ul li > div.details > div.attributes > h3 {
-    font-size: 11px;
-    margin: 0px 10px 0px 0px;
+    margin: 0px 10px 5px 0px;
     float: left;
     text-decoration: underline;
+    font-size: 0.7vw;
 }
 .browse > .list  > ul li > div.details > p {
-    font-size: 14px;
     margin: 0;
+    font-size: 0.9vw;
 }
 .browse > .list  > ul li > div.actions {
     float: right;
-    width: 150px;
+    width: 16%;
 }
 .browse > .list  > ul li > div.actions > h2 {
-    font-size: 24px;
     margin: 0;
 }
-.browse > .list  > ul li > div.actions > button {
+button, input[type="submit"] {
     font-family: inherit;
     padding: .5em 1em;
     color: rgba(0,0,0,.8);
@@ -225,6 +237,12 @@ float: left;
     background-color: #E6E6E6;
     text-decoration: none;
     border-radius: 2px;
+}
+button:hover, input[type="submit"]:hover{
+    background-color: #efefef;
+}
+button:focus, input[type="submit"]:focus{
+    outline: 0;
 }
 .browse > .list  > ul li > div.actions > button:disabled {
     font-family: inherit;
@@ -238,13 +256,11 @@ float: left;
 
 
 .browse .comparer {
-    background: #fff;
-    border: 1px solid #787878;
-    border-radius: 2px;
+
     padding: 10px;
 }
 .browse .comparer > h3 {
-
+    font-size: 1em;
 }
 .browse .comparer > ul {
 
@@ -253,14 +269,12 @@ float: left;
     list-style: none;
     overflow: hidden;
     text-align: left;
+    margin-bottom: 10px;
 }
 .browse .comparer > ul li h4 {
     font-size: 10px;
     float: left;
-    max-width: 200px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+    width: 85%;
 }
 .browse .comparer  > ul li button {
     font-family: inherit;
@@ -271,6 +285,7 @@ float: left;
     text-decoration: none;
     border-radius: 2px;
     float: right;
+    width: 15%;
 }
 .browse .comparer  > ul li button:disabled {
     font-family: inherit;
@@ -282,7 +297,7 @@ float: left;
     border-radius: 2px;
 }
 .browse .compare-big {
-    width: 800px;
+    width: 75%;
     float: right;
     min-height: 966px;
     position: relative;
@@ -292,7 +307,8 @@ float: left;
     float: left;
 
     text-align: right;
-    margin: 155px 5px 5px 45px;
+    margin: 155px 1% 1% 5%;
+    width: 15%;
 }
 .browse .compare-big .properties .property {
     padding: 5px;
@@ -304,16 +320,22 @@ float: left;
 }
 
 .browse .compare-big > ul {
-list-style: none;
+    list-style: none;
+    overflow: hidden;
+    width: 75%;
+    float: left;
 }
 .browse .compare-big > ul li {
     float: left;
-    width: 180px;
+    width: 31%;
     min-height: 200px;
     background-color: #EDEDED;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    margin: 5px;
+    margin: 1%;
+}
+.browse .compare-big #close {
+    width: 4%;
 }
 
 .browse .compare-big > ul li > .img {
@@ -328,6 +350,7 @@ list-style: none;
     height: 50px;
     font-size: 13px;
     line-height: 16px;
+    cursor: pointer;
 }
 
 .browse .compare-big > ul li .property {
@@ -404,6 +427,50 @@ overflow: hidden;
 #map {
     height: 100%;
     margin-bottom: -14px;
+}
+
+
+.wineDetails {
+    width: 40%;
+    position: fixed;
+    top: 10%;
+    left: 30%;
+    background: #fff;
+    border: 2px solid #777;
+    padding: 1%;
+}
+.wineDetails > .img img {
+    max-height: 100px;
+}
+.wineDetails > h4 {
+    margin: 5% 0px;
+}
+.wineDetails .property {
+    overflow: hidden;
+    width: 40%;
+    float: left;
+    margin: 0% 5%;
+}
+.wineDetails .property > p {
+    float: left;
+    text-align: right;
+    width: 45%;
+    font-size: 80%;
+    line-height: 1.8;
+}
+.wineDetails .property > .value {
+    float: right;
+    text-align: left;
+    width: 50%;
+    margin-left: 5%;
+}
+.wineDetails .property > .value p {
+
+}
+.wineDetails button {
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 .loader-div {
@@ -526,4 +593,50 @@ overflow: hidden;
     100% {
         height: 0%;
     }
-}*/
+}
+
+@media screen and (max-width: 1600px) {
+    h2 {
+        font-size: 19px;
+    }
+    .browse > .list > ul li > div.details > div.attributes > h3 {
+        font-size: 12px;
+    }
+    .browse > .list > ul li > div.details > p {
+        margin: 0;
+        font-size: 12px;
+    }
+}
+@media screen and (max-width: 1000px) {
+    .browse .comparer > ul {
+        margin: 5%;
+    }
+    .browse .comparer > ul li button {
+        width: 35px;
+    }
+    .browse .filters form #search {
+    }
+    .browse .filters form button[type=submit] {
+    }
+    .browse > .left {
+        float: none;
+        width: 100%;
+        overflow: hidden;
+        margin-bottom: 20px;
+    }
+    .browse > .list {
+        float: none;
+        width: 100%;
+    }
+    .browse .filters {
+        width: 40%;
+        float: left;
+    }
+    .browse .comparer {
+        width: 60%;
+        float: left;
+    }
+}
+@media screen and (max-width: 860px) {
+
+}

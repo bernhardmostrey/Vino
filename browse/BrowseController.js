@@ -37,6 +37,7 @@ app.controller("BrowseController", function($scope) {
         var promise = checkCompareStorage($scope.compareList, false);
         promise.done(function(compare){
             $scope.compareList = compare;
+            $scope.$apply();
         });
 
     };
@@ -48,6 +49,7 @@ app.controller("BrowseController", function($scope) {
             var promise = checkCompareStorage($scope.compareList, true);
             promise.done(function(compare){
                 $scope.compareList = compare;
+                $scope.$apply();
             });
         }
     };
@@ -110,6 +112,18 @@ app.controller("BrowseController", function($scope) {
         }
     };
 
+    $scope.grepLength = function(list, w){
+        var result = $.grep(list, function(e){ return e.Name == w.Name; });
+        return result.length;
+    };
+
+    $scope.detailsList = [];
+    $scope.addToDetails = function(w){
+        $scope.detailsList[0] = w;
+    };
+    $scope.hideDetails = function(){
+        hideClass(".wineDetails");
+    };
 
     $scope.searchList = [];
     $scope.searching = false;

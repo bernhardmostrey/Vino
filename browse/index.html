@@ -23,19 +23,19 @@
             </ul>
         </nav>
     </header>
-
+</div>
 
     <div class="carousel">
-        <img src="https://timmeubanks.files.wordpress.com/2012/03/vena_wine_beauty.jpg" alt="" />
+        <img src="../assets/wineheader.jpg" alt="" />
     </div>
-
+<div class="container">
     <div class="browse">
         <div class="left">
             <div class="filters">
                 <ul>
                     <li>Sort by Popularity</li>
                     <li>Sort by Rating</li>
-                    <li><form ng-submit="search()"><input type="text" id="search" /><input type="submit" value="Search" /></form></li>
+                    <li><form ng-submit="search()"><input type="text" id="search" /><button type="submit" ><i class="fa fa-search fa-lg"></i></button></form></li>
                 </ul>
             </div>
             <div class="comparer">
@@ -96,7 +96,7 @@
                 <li ng-repeat="w in compareList">
 
                     <div class="img"><img fallback-src="{{w.labelUrl}}" src="{{w.ImageUrl}}" /></div>
-                    <h4>{{w.Name}}</h4>
+                    <h4 ng-click="addToDetails(w)">{{w.Name}}</h4>
                     <div class="property">
                         <div class="value"><p>{{w.AppellationName}}</p></div>
                     </div>
@@ -140,7 +140,7 @@
                     <button ng-click="removeFromCompare(w, $event)"><i class="fa fa-minus fa-lg"></i></button>
                 </li>
             </ul>
-            <button ng-click="hideCompareBig()"><i class="fa fa-close fa-lg"></i></button>
+            <button id="close" ng-click="hideCompareBig()"><i class="fa fa-close fa-lg"></i></button>
         </div>
 
         <div class="list">
@@ -158,14 +158,14 @@
             <li ng-if="!searching" ng-repeat="w in browseList | orderBy: sortOrder">
                 <div class="img"><img fallback-src="{{w.labelUrl}}" src="{{w.ImageUrl}}" /></div>
                 <div class="details">
-                    <h2>{{w.Name}}</h2>
+                    <h2 ng-click="addToDetails(w)">{{w.Name}}</h2>
                     <div class="attributes"><h3 ng-repeat="a in w.Attributes">{{a.Name}}</h3></div>
                     <p>Rating: {{w.highestReview}}</p>
                 </div>
                 <div class="actions">
-                    <h2>{{w.PriceRetail}}</h2>
-                    <button ng-if="compareList.indexOf(w) >= 0 || compareList.length >= 3" ng-click="addToCompare(w, $event)" disabled><i class="fa fa-plus fa-lg"></i></button>
-                    <button ng-if="!(compareList.indexOf(w) >= 0) && compareList.length < 3" ng-click="addToCompare(w, $event)"><i class="fa fa-plus fa-lg"></i></button>
+                    <h2>€{{w.PriceRetail}}</h2>
+                    <button ng-if="grepLength(compareList, w) > 0 || compareList.length >= 3" ng-click="addToCompare(w, $event)" disabled><i class="fa fa-plus fa-lg"></i></button>
+                    <button ng-if="grepLength(compareList, w) == 0 && compareList.length < 3" ng-click="addToCompare(w, $event)"><i class="fa fa-plus fa-lg"></i></button>
                 </div>
             </li>
             <li id="searchResults" ng-if="searching" ng-repeat="w in searchList">
@@ -194,7 +194,61 @@
         </div>
     </div>
 
+<div class="wineDetails" ng-repeat="w in detailsList">
+    <div class="img"><img fallback-src="{{w.labelUrl}}" src="{{w.ImageUrl}}" /></div>
+    <h4>{{w.Name}}</h4>
+    <div class="property">
+        <p>Appellation Name</p>
+        <div class="value"><p>{{w.AppellationName}}</p></div>
+    </div>
 
+    <div class="property">
+        <p>Region Name</p>
+        <div class="value"><p>{{w.RegionName}}</p></div>
+    </div>
+
+    <div class="property">
+        <p>Year</p>
+        <div class="value"><p>{{w.Year}}</p></div>
+    </div>
+
+    <div class="property">
+        <p>Varietal</p>
+        <div class="value"><p>{{w.Varietal}}</p></div>
+    </div>
+
+    <div class="property">
+        <p>Winetype</p>
+        <div class="value"><p>{{w.WineType}}</p></div>
+    </div>
+
+    <div class="property">
+        <p>Vineyard</p>
+        <div class="value"><p>{{w.VineyardName}}</p></div>
+    </div>
+
+    <div class="property">
+        <p>Highest Review</p>
+        <div class="value"><p>{{w.HighestReview}}</p></div>
+    </div>
+
+    <div class="property">
+        <p>Highest Rating</p>
+        <div class="value"><p>{{w.HighestRating}}</p></div>
+    </div>
+
+    <div class="property">
+        <p>Price</p>
+        <div class="value"><p>{{w.PriceRetail}}</p></div>
+    </div>
+
+    <div class="property">
+        <p>Attributes</p>
+        <div class="value"><p ng-repeat="a in w.Attributes">{{a.Name}}</p></div>
+    </div>
+
+    <button ng-click="hideDetails()"><i class="fa fa-close fa-lg"></i></button>
+</div>
 
 </div>
 
@@ -213,5 +267,6 @@
 
 <script src="BrowseController.js"></script>
 <script src="../src/app/shared/Wine.js"></script>
+
 </body>
 </html>

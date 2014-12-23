@@ -16,59 +16,14 @@ app.controller("MainController", function($scope) {
         }
     });
 
+    $scope.detailsList = [];
+    $scope.addToDetails = function(w){
+        $scope.detailsList[0] = w;
+    };
+    $scope.hideDetails = function(){
+        hideClass(".wineDetails");
+    };
 
-
-
-
-
-
-    //$scope.hideContainer = true;
-    //$scope.fullLoader = true;
-
-    /*$scope.offlineMode = false;
-    if($scope.offlineMode == true){
-        //Offline
-        console.log("offline");
-        var promise = promiseJSONOffline("scripts/json/popular.json");
-        promise.done(function(data){
-            offlinePopular = data;
-
-            //$scope.loaded = true;
-            setTimeout(function(){$scope.hideContainer = false;$scope.$apply();}, 500);
-
-            $scope.top4 = [];
-            $scope.top4 = getTop4(offlinePopular);
-
-        });
-        promise.fail(function(){
-            console.log("Something went wrong with json: "+json);
-        });
-    }else{
-        //online
-        console.log("online");
-        hideClass(".top4 ul");
-        promiseJSON(jsonPopular+catRedWhiteRose, 4, 0)
-            .done(function(data){
-
-                //$scope.loaded = true;
-                setTimeout(function(){$scope.hideContainer = false;$scope.$apply();}, 500);
-
-                $scope.top4 = [];
-                $scope.top4 = getTop4(data);
-
-                hideClass(".top4 .loader-div");
-                setTimeout(function(){showClass(".top4 ul");}, 500);
-
-            })
-            .fail(function(){
-                console.log("Something went wrong with json: "+json);
-            });
-
-    }
-
-
-    $scope.error =  "";
-    $scope.big = true;*/
 });
 
 function getTop4(list){
