@@ -1,0 +1,38 @@
+commit 6579eb04a11e6218dd004e28f379d3e77397a6b5
+Author: bernhardmostrey <bmostrey@gmail.com>
+Date:   Tue Dec 23 20:02:27 2014 +0100
+
+    LabelGame + Vergelijker bugs
+
+commit c81ba2e9ab2d409fadeb24f2b4e82b3e68f980ba
+Author: bernhardmostrey <bmostrey@gmail.com>
+Date:   Tue Dec 23 13:12:29 2014 +0100
+
+    Responsive v1, wineDetails, design edit
+
+commit 71a8e88240a17801cb4ff2223dd80b9d25fbe81e
+Author: bernhardmostrey <bmostrey@gmail.com>
+Date:   Mon Dec 22 18:28:39 2014 +0100
+
+    Comparer almost finished + debugged + added searching
+
+commit 78c5826d47726e636d643e50040ae6f972a9476f
+Author: bernhardmostrey <bmostrey@gmail.com>
+Date:   Mon Dec 22 16:25:17 2014 +0100
+
+    Browsing added comparer
+
+commit fec3511db11fa60d6192ee4cdb1f75cd8e0b51e6
+Author: bernhardmostrey <bmostrey@gmail.com>
+Date:   Tue Dec 16 11:31:46 2014 +0100
+
+    Home, Browse verbeterd
+    
+    Beiden werken nu goed en laden in wanneer het nodig is, storage in
+    localstorage
+
+commit 48988774295f3e38b4adbed2a1bb19b44b31a6c0
+Author: bernhardmostrey <bmostrey@gmail.com>
+Date:   Tue Dec 9 11:59:32 2014 +0100
+
+    Begin van Home, Browse en Timeline
