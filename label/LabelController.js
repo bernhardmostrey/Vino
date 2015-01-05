@@ -3,6 +3,8 @@
  */
 app.controller("BrowseController", function($scope) {
 
+    $scope.labelComplete = false;
+
     var game = new LabelGame();
     game.determineObjects();
 
@@ -12,6 +14,7 @@ app.controller("BrowseController", function($scope) {
     game.resetActive();
     $scope.selectedObject.active = true;
     game.drawObjects();
+    $("#options").css({"top":(parseInt($scope.selectedObject.top) + (parseInt($scope.selectedObject.height)/2)-12) + "%", "left": "80%"});
 
     $scope.numberCorrect = 0;
 
@@ -22,30 +25,30 @@ app.controller("BrowseController", function($scope) {
         game.resetActive();
         $scope.selectedObject.active = true;
 
+        $("#options").css({"top":(parseInt(o.top) + (parseInt(o.height)/2)-12) + "%", "left": "80%"});
+
         console.log(o.name);
         $scope.$apply();
         game.drawObjects();
     };
 
-    //$scope.selectedName = "percentage";
-
-
-
     $scope.radioChanged = function(s){
         $scope.selectedObject.guessedName = s;
-        //console.log($scope.selectedObject.guessedName);
+        $scope.selectedObject.bGuessed = false;
         if($scope.selectedObject.name == s){
             $scope.selectedObject.bGuessed = true;
-            //console.log("correct");
-            $scope.numberCorrect++;
-        }
-        //$scope.selectedObject.guessedName = s;
-        /*console.log($scope.selectedObject.name);
-        if($scope.selectedObject.name = s){
-            $scope.selectedObject.bGuessed = true;
-            console.log("correct!");
-        }*/
+            $scope.objects[$scope.objects.indexOf($scope.selectedObject)].bGuessed = true;
 
+            var g = $.grep($scope.objects, function(e){ return e.bGuessed == true; });
+            console.log(g.length);
+            if(g.length == $scope.objects.length){
+                $scope.labelComplete = true;
+                $scope.$apply();
+            }
+        }
+    }
+    $scope.copyToClipboard = function(text){
+            window.prompt("Copy to clipboard: Ctrl+C (or CMD+C on Mac), Enter", text);
     }
 
 });

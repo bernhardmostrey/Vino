@@ -31,6 +31,8 @@ var catRedWhiteRose = "&filter=categories(490+124+125+126)";
 var catFrance = "&filter=categories(490+124+125+126+10039+10038+102)";
 var catItaly = "&filter=categories(490+124+125+126+105)";
 var catSpain = "&filter=categories(490+124+125+126+109)";
+var catAmerica = "&filter=categories(490+124+125+126+101+103+104)";
+var catAll = "&filter=categories(490+124+125+126+10039+10038+102+105+109+101+103+104)";
 
 var onlinePopular = [];
 function promiseJSON500(json){
@@ -230,7 +232,12 @@ function getWinesFromData(list){
     for (i = 0; i < list.length; i++) {
         try {
             var value = list[i];
-            var w = new Wijn(value.Id, value.Name, value.Url, value.Appellation.Name, value.Appellation.Region.Name, value.Labels[0].Url, value.Varietal.Name, value.Varietal.WineType.Name, value.Vineyard.Name, value.Vineyard.ImageUrl, value.Community.Reviews.HighestScore, value.Ratings.HighestScore, value.PriceRetail, value.ProductAttributes);
+            angular.forEach(value.ProductAttributes, function(a, key){
+                a.Name = a.Name.replace("&amp;","&");
+                a.Name = a.Name.replace("&AMP;","&");
+            });
+            var w = new Wijn(value.Id, value.Name, value.Url, value.Appellation.Name, value.Appellation.Region.Name, value.Labels[0].Url, value.Varietal.Name, value.Varietal.WineType.Name, value.Vineyard.Name, value.Vineyard.ImageUrl, value.Community.Reviews.HighestScore, value.Ratings.HighestScore, value.PriceRetail, value.ProductAttributes, value.Url);
+
             wines.push(w);
         }catch(err){
             console.log(err);

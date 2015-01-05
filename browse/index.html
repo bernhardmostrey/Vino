@@ -10,7 +10,7 @@
 
 </head>
 <body ng-app="app" ng-controller="BrowseController" ng-cloak>
-
+<div class="clear-storage" onclick="localStorage.clear();"><p>Clear storage</p></div>
 <div class="container">
     <header>
         <h1>Vino</h1>
@@ -26,8 +26,8 @@
     </header>
 </div>
 
-    <div class="carousel">
-        <img src="../assets/wineheader.jpg" alt="" />
+    <div class="carousel" style="height: 250px;">
+        <img src="../assets/wineheader.jpg" alt="" style="margin-top: -115px;" />
     </div>
 <div class="container">
     <div class="browse">
@@ -172,14 +172,14 @@
             <li id="searchResults" ng-if="searching" ng-repeat="w in searchList">
                 <div class="img"><img fallback-src="{{w.labelUrl}}" src="{{w.ImageUrl}}" /></div>
                 <div class="details">
-                    <h2>{{w.Name}}</h2>
+                    <h2 ng-click="addToDetails(w)">{{w.Name}}</h2>
                     <div class="attributes"><h3 ng-repeat="a in w.Attributes">{{a.Name}}</h3></div>
                     <p>Rating: {{w.highestReview}}</p>
                 </div>
                 <div class="actions">
-                    <h2>{{w.PriceRetail}}</h2>
-                    <button ng-if="compareList.indexOf(w) >= 0 || compareList.length >= 3" ng-click="addToCompare(w, $event)" disabled><i class="fa fa-plus fa-lg"></i></button>
-                    <button ng-if="!(compareList.indexOf(w) >= 0) && compareList.length < 3" ng-click="addToCompare(w, $event)"><i class="fa fa-plus fa-lg"></i></button>
+                    <h2>€{{w.PriceRetail}}</h2>
+                    <button ng-if="grepLength(compareList, w) > 0 || compareList.length >= 3" ng-click="addToCompare(w, $event)" disabled><i class="fa fa-plus fa-lg"></i></button>
+                    <button ng-if="grepLength(compareList, w) == 0 && compareList.length < 3" ng-click="addToCompare(w, $event)"><i class="fa fa-plus fa-lg"></i></button>
                 </div>
             </li>
             <p ng-if="error">{{errorMessage}}</p>
@@ -246,6 +246,10 @@
     <div class="property">
         <p>Attributes</p>
         <div class="value"><p ng-repeat="a in w.Attributes">{{a.Name}}</p></div>
+    </div>
+
+    <div class="property">
+        <p>More Details on <a target="_blank" href="{{w.Link}}">Wine.com</a></p>
     </div>
 
     <button ng-click="hideDetails()"><i class="fa fa-close fa-lg"></i></button>

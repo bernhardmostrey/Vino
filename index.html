@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>Wijn</title>
+    <title>Vino</title>
     <!--<link href="css/bootstrap.min.css" rel="stylesheet" />-->
     <link href="css/style.css" rel="stylesheet"/>
     <link rel="stylesheet" href="http://use.typekit.net/c/18eb21/1w;brandon-grotesque,2,Y2h:P:i1,Y2g:P:n1,Y2j:P:n3,Y2n:P:n5;open-sans,2,VvG:P:i3,VvD:P:i4,VvF:P:n3,VvH:P:n4/d?3bb2a6e53c9684ffdc9a9bf61f5b2a62850218b0182b3a8f955d7ad2db6645a15a2fece75238ea26f1d85c9a1cbc76cb00e4efb7e79ecf0958e13855066b3466b2732dad8957bb80765959e885ec08226954a671c7986d991f797e750d51ea638e35088bc259d167bb">
@@ -10,10 +10,11 @@
 </head>
 <body ng-app="app" ng-controller="MainController" >
 <!--<div class="loader-div" id="PageLoad"><span class="loader"><span class="loader-inner"></span></span></div>-->
+<div class="clear-storage" onclick="localStorage.clear();"><p>Clear storage</p></div>
 
 <div class="container wrapper">
     <header>
-        <h1>Wijn</h1>
+        <h1>Vino</h1>
         <nav>
             <ul>
                 <li><a href=".">Home</a></li>
@@ -100,6 +101,10 @@
         <div class="property">
             <p>Attributes</p>
             <div class="value"><p ng-repeat="a in w.Attributes">{{a.Name}}</p></div>
+        </div>
+
+        <div class="property">
+            <p>More Details on <a target="_blank" href="{{w.Link}}">Wine.com</a></p>
         </div>
 
         <button ng-click="hideDetails()"><i class="fa fa-close fa-lg"></i></button>

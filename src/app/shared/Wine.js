@@ -52,7 +52,7 @@
  /**
  * Created by bernhard on 27/11/14.
  */
-function Wijn(id, name, url, appellationName, regionName,labelUrl, varietal, wineType, vineyardName, vineyardImage, highestReview, highestRating, priceRetail, attributes) {
+function Wijn(id, name, url, appellationName, regionName,labelUrl, varietal, wineType, vineyardName, vineyardImage, highestReview, highestRating, priceRetail, attributes, link) {
     this.id = id;
     this.name = name;
     this.url = url;
@@ -67,6 +67,7 @@ function Wijn(id, name, url, appellationName, regionName,labelUrl, varietal, win
     this.highestRating = highestRating;
     this.priceRetail = priceRetail;
     this.attributes = attributes;
+    this.link = link;
 }
 
 Wijn.prototype = {
@@ -115,5 +116,7 @@ Wijn.prototype = {
     get PriceRetail() { return this.priceRetail },
     set PriceRetail(priceRetail) {this.priceRetail = priceRetail},
     get Attributes() { return this.attributes },
-    set Attributes(attributes) {this.attributes = attributes}
+    set Attributes(attributes) {this.attributes = attributes},
+    get Link() { return this.link },
+    set Link(link) {this.link = link}
 };

@@ -7,15 +7,28 @@
     padding: 0;
     box-sizing: border-box;
 }
-
-/* bootstrap fix */
-.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
-
+html, body {
+    height: 100%;
+}
 body {
     background-color: #fefefe;
     text-align: center;
     font-family:open-sans,sans-serif;font-weight:400;
     font-size:100%;line-height: 1.45;
+}
+
+.clear-storage {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 11px;
+}
+.clear-storage:hover {
+    cursor: pointer;
+    background-color: #d9534f;
+}
+.clear-storage > p {
+    margin: 5px;
 }
 
 h1, h2, h3 {
@@ -82,10 +95,20 @@ header > nav > ul li a {
     font-size: 14px;
     line-height: 14px;
 }
-
+.page-wrap {
+    min-height: 100%;
+    /* equal to footer height */
+    margin-bottom: -94px;
+}
+.page-wrap:after {
+    content: "";
+    display: block;
+}
+footer, .page-wrap:after {
+    height: 80px;
+}
 footer {
     color: #efefef;
-    height: 80px;
     background: #372c26;
 }
 footer > p {
@@ -142,6 +165,7 @@ font-size: 3vw;
     margin: 20px auto;
     width: 90%;
 }
+
 .browse > .left {
     float: left;
     width: 25%;
@@ -153,9 +177,9 @@ font-size: 3vw;
 }
 .browse .filters form #search {
     padding: 5px 5px;
-    background-color: rgb(255, 177, 177);
+    /*background-color: rgb(255, 177, 177);*/
     border: none;
-    color: #fff;
+    /*color: #fff;*/
     font-size: 14px;
     margin: 2% 2% 2% 0;
     width: 80%;
@@ -165,17 +189,18 @@ font-size: 3vw;
     line-height: 19px;
     height: 28px;
     width: 16%;
+
 }
 .browse .filters > ul {
 
 }
 .browse .filters > ul li {
     text-align: left;
-    background-color: #D2312B;
+    /*background-color: #D2312B;*/
     margin: 10px;
     padding: 2px 12px;
     font-size: 12px;
-    color: #fff;
+    /*color: #fff;*/
     text-transform: uppercase;
     cursor: pointer;
 }
@@ -238,14 +263,24 @@ list-style: none;
 button, input[type="submit"] {
     font-family: inherit;
     padding: .5em 1em;
-    color: rgba(0,0,0,.8);
-    border: 0 rgba(0,0,0,0);
-    background-color: #E6E6E6;
     text-decoration: none;
-    border-radius: 2px;
+    /*border-radius: 2px;*/
+    cursor: pointer;
+
+    /*background-color: #E6E6E6;*/
+    /*color: rgba(0,0,0,.8);*/
+    /*border: 0 rgba(0,0,0,0);*/
+    background-color: #E04F4F;
+    color: white;
+    border: none;
+}
+button a, input[type="submit"] a {
+    color: white;
+    text-decoration: none;
 }
 button:hover, input[type="submit"]:hover{
-    background-color: #efefef;
+    /*background-color: #efefef;*/
+    background-color: #b13e3e;
 }
 button:focus, input[type="submit"]:focus{
     outline: 0;
@@ -253,9 +288,9 @@ button:focus, input[type="submit"]:focus{
 .browse > .list  > ul li > div.actions > button:disabled {
     font-family: inherit;
     padding: .5em 1em;
-    color: rgba(129, 129, 129, 0.80);
+    color: white;
     border: 0 rgba(0,0,0,0);
-    background-color: #f3f3f3;
+    background-color: rgb(255, 188, 191);
     text-decoration: none;
     border-radius: 2px;
 }
@@ -285,11 +320,11 @@ button:focus, input[type="submit"]:focus{
 .browse .comparer  > ul li button {
     font-family: inherit;
     padding: .5em 1em;
-    color: rgba(0,0,0,.8);
-    border: 0 rgba(0,0,0,0);
-    background-color: #E6E6E6;
+    /*color: rgba(0,0,0,.8);*/
+    /*border: 0 rgba(0,0,0,0);*/
+    /*background-color: #E6E6E6;*/
     text-decoration: none;
-    border-radius: 2px;
+    /*border-radius: 2px;*/
     float: right;
     width: 15%;
 }
@@ -311,10 +346,13 @@ button:focus, input[type="submit"]:focus{
 }
 .browse .compare-big .properties {
     float: left;
-
+    background-color: #EDEDED;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     text-align: right;
-    margin: 155px 1% 1% 5%;
-    width: 15%;
+    margin: 148px 1% 1% 5%;
+    width: 13%;
+    padding: 1%;
 }
 .browse .compare-big .properties .property {
     padding: 5px;
@@ -335,15 +373,20 @@ button:focus, input[type="submit"]:focus{
     float: left;
     width: 31%;
     min-height: 200px;
-    background-color: #EDEDED;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+
+
     margin: 1%;
+    position: relative;
 }
 .browse .compare-big #close {
     width: 4%;
 }
-
+.browse .compare-big > ul li > button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}
 .browse .compare-big > ul li > .img {
     height: 100px;
 }
@@ -430,9 +473,44 @@ overflow: hidden;
     font-size: 10px;
 }
 
+#map-wrapper {
+    position: relative;
+}
+
+#map-wrapper .panner {
+
+}
+#map-wrapper .panner > ul {
+    margin: 0px 0px 15px 0px;
+}
+#map-wrapper .panner > ul li {
+    display: inline;
+    padding: 15px 30px;
+}
+#map-wrapper .panner > ul li:hover {
+    cursor: pointer;
+    background-color:#E04F4F;
+    color: white;
+}
+#map-wrapper .panner {
+
+}
+
+
 #map {
     height: 100%;
     margin-bottom: -14px;
+}
+#map #content img {
+
+}
+#map #content h2 {
+    font-size: 1.1em;
+    line-height: 1;
+    margin: 25px 0 0 0;
+}
+#map #content h3 {
+    margin: 10px 0 15px 0px;
 }
 
 
@@ -490,7 +568,7 @@ overflow: hidden;
 #label {
     position: relative;
     width: 80%;
-    float: left;
+    margin: 0 auto;
 }
 #label > img {
 
@@ -507,10 +585,13 @@ overflow: hidden;
     background-color: rgba(169, 68, 66, 0.36);
 }
 #label-wrapper #options {
-    float: right;
-    width: 16%;
-    margin: 2%;
+    /* float: right; */
+    width: 14%;
+    height: 24%;
     text-align: left;
+    position: absolute;
+    z-index: 1;
+    font-size: 100%;
 }
 #label-wrapper #options > h2 {
     text-align: left;
@@ -518,15 +599,64 @@ overflow: hidden;
 #label-wrapper #options > ul {
     list-style: none;
     background-color: #EDEDED;
-    padding: 5%;
+    padding: 3%;
+    overflow: hidden;
+    clear: both;
+    border-radius: 10px;
+
 }
 #label-wrapper #options > ul li {
-
+    /*float: left;*/
+    margin: 5px 12px;
 }
 #label-wrapper #options > ul li > input {
     margin: 5%;
 }
+#label-wrapper #options > ul li > button {
+    width: 100%;
+}
+#label-wrapper #options > ul li > button:hover {
+    background-color: #5cbfff;
+    cursor: pointer;
+}
+#label-wrapper #options > ul li > button.active {
+    background-color: #0098ff;
+    color: white;
+}
 #label-wrapper #options > ul li > input::before {
+
+}
+#label-wrapper #options:after
+{
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 12px 16px 12px 0;
+    border-color: transparent #FFFFFF;
+    display: block;
+    width: 0;
+    z-index: 1;
+    margin-top: -12px;
+    left: -16px;
+    top: 50%;
+}
+#label-complete {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #fefefe;
+    padding: 3%;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+#label-complete > h1 {
+
+}
+#label-complete > h3 {
+
+}
+#label-complete > button {
 
 }
 
@@ -663,6 +793,15 @@ overflow: hidden;
         margin: 0;
         font-size: 12px;
     }
+    #label-wrapper #options {
+        font-size: 75%;
+    }
+}
+@media screen and (max-width: 1300px){
+    #label-wrapper #options {
+        font-size: 75%;
+        width: 18%;
+    }
 }
 @media screen and (max-width: 1000px) {
     .browse .comparer > ul {
@@ -692,6 +831,10 @@ overflow: hidden;
     .browse .comparer {
         width: 60%;
         float: left;
+    }
+    #label-wrapper #options {
+        font-size: 60%;
+        width: 19%;
     }
 }
 @media screen and (max-width: 860px) {

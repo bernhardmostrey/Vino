@@ -24,6 +24,7 @@ app.controller("BrowseController", function($scope) {
 
                 angular.forEach(value.Attributes, function(a, key){
                     a.Name = a.Name.replace("&amp;","&");
+                    a.Name = a.Name.replace("&AMP;","&");
                 })
             });
             $scope.browseList = list;
@@ -136,12 +137,17 @@ app.controller("BrowseController", function($scope) {
         if(input.length > 0){
             input = input.replace(" ", "+");
 
+            hideClass(".browse .list ul li");
+            showClass(".browse .list ul .loader-div");
+
             var promise = searchWine(input);
             promise.done(function(search){
                 $scope.searchList = search;
-                console.log($scope.searchList);
+                $scope.currentPage = 0;
                 $scope.searching = true;
                 $scope.$apply();
+                hideClass(".browse .list ul .loader-div");
+                setTimeout(function(){showClass(".browse .list ul li");}, 500);
             });
             promise.fail(function(){
                 $scope.searching = true;
@@ -150,6 +156,8 @@ app.controller("BrowseController", function($scope) {
                 $scope.error = true;
                 $scope.errorMessage = "No results were found. :(";
                 $scope.$apply();
+                hideClass(".browse .list ul .loader-div");
+                setTimeout(function(){showClass(".browse .list ul li");}, 500);
             });
 
 
@@ -171,7 +179,11 @@ function getCertainWines(list, start, length){
             if(list[i] != null){
                 try {
                     var value = list[i];
-                    var w = new Wijn(value.Id, value.Name, value.Url, value.Appellation.Name, value.Appellation.Region.Name, value.Labels[0].Url, value.Varietal.Name, value.Varietal.WineType.Name, value.Vineyard.Name, value.Vineyard.ImageUrl, value.Community.Reviews.HighestScore, value.Ratings.HighestScore, value.PriceRetail, value.ProductAttributes);
+                    angular.forEach(value.ProductAttributes, function(a, key){
+                        a.Name = a.Name.replace("&amp;","&");
+                        a.Name = a.Name.replace("&AMP;","&");
+                    });
+                    var w = new Wijn(value.Id, value.Name, value.Url, value.Appellation.Name, value.Appellation.Region.Name, value.Labels[0].Url, value.Varietal.Name, value.Varietal.WineType.Name, value.Vineyard.Name, value.Vineyard.ImageUrl, value.Community.Reviews.HighestScore, value.Ratings.HighestScore, value.PriceRetail, value.ProductAttributes, value.Url);
                     result.push(w);
                 }catch(err){
                         console.log(err);

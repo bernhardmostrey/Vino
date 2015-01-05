@@ -10,6 +10,8 @@
 
 </head>
 <body ng-app="app" ng-controller="BrowseController" ng-cloak>
+<div class="clear-storage" onclick="localStorage.clear();"><p>Clear storage</p></div>
+<div class="page-wrap">
 
 <div class="container">
     <header>
@@ -17,10 +19,10 @@
         <nav>
             <ul>
                 <li><a href="../">Home</a></li>
-                <li><a href=".">Browse</a></li>
+                <li><a href="../browse">Browse</a></li>
                 <li><a href="../timeline">Timeline</a></li>
                 <li><a href="../map">Map</a></li>
-                <li><a href="../label">Label Game</a></li>
+                <li><a href=".">Label Game</a></li>
             </ul>
         </nav>
     </header>
@@ -37,15 +39,28 @@
             <!--top: 80%;-->
             <!--left: 30%;-->
             <!--"></div>-->
-        </div>
-        <div id="options">
-            <ul >
-                <li ng-repeat="o in objects"><input type="radio" ng-click="radioChanged(o.name)" ng-checked="selectedObject.guessedName == o.name" name="object" value="o.name"><label>{{o.name}}</label></li>
-            </ul>
-            <h2>Correct answers: {{numberCorrect}}</h2>
+            <div id="options">
+                <ul >
+                    <!--<li ng-repeat="o in objects"><input type="radio" ng-click="radioChanged(o.name)" ng-checked="selectedObject.guessedName == o.name" name="object" value="o.name"><label>{{o.name}}</label></li>-->
+                    <li ng-repeat="o in objects">
+                        <button ng-show="selectedObject.guessedName == o.name" class="active" ng-click="radioChanged(o.name)" name="object">{{o.name}}</button>
+                        <button ng-hide="selectedObject.guessedName == o.name" ng-click="radioChanged(o.name)" name="object">{{o.name}}</button>
+                    </li>
+                </ul>
+                <!--<h2>Correct answers: {{numberCorrect}}</h2>-->
+            </div>
+            <div id="label-complete" ng-if="labelComplete">
+                <h1>Congratulations!</h1>
+                <h3>You can now go shopping for a gift basket with 15% off!</h3>
+                <button ng-click="copyToClipboard('RMN15GB')">Copy code RMN15GB to clipboard.</button>
+                <button><a target="_blank" href="http://www.wine.com/v6/giftcenter/">Go shopping!</a></button>
+            </div>
         </div>
 
+
     </div>
+
+
 
 
     <div class="wineDetails" ng-repeat="w in detailsList">
@@ -105,7 +120,7 @@
     </div>
 
 </div>
-
+</div>
 <footer>
     <p>&copy; Created by Bernhard Mostrey & Bram Regelbrugge</p>
 </footer>
