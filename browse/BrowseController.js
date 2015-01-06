@@ -9,14 +9,17 @@ app.controller("BrowseController", function($scope) {
 
 
     $scope.compareList = [];
-    var promise = checkCompareStorage($scope.compareList, false);
-    promise.done(function(compare){
+    var promise = checkCompareStorage($scope.compareList, false).fail();
+    promise.then(function(compare){
         $scope.compareList = compare;
+    }, function(error) {
+        console.error("Failed!", error);
+        showPageError();
     });
 
     var loadedWines = [];
     var promise = checkStorage("wines", jsonPopular+catRedWhiteRose, 0, 100);
-    promise.done(function(data){
+    promise.then(function(data){
         loadedWines = data;
         if(loadedWines.length > 0){
             var list = loadedWines.slice($scope.currentPage*$scope.pageSize,$scope.pageSize);
@@ -32,14 +35,20 @@ app.controller("BrowseController", function($scope) {
             hideClass(".browse .list ul .loader-div");
             setTimeout(function(){showClass(".browse .list ul li");}, 500);
         }
+    }, function(error) {
+        console.error("Failed!", error);
+        showPageError();
     });
 
     $scope.addToCompare = function(w, $event){
         $scope.compareList.push(w);
         var promise = checkCompareStorage($scope.compareList, false);
-        promise.done(function(compare){
+        promise.then(function(compare){
             $scope.compareList = compare;
             $scope.$apply();
+        }, function(error) {
+            console.error("Failed!", error);
+            showPageError();
         });
 
     };
@@ -49,8 +58,11 @@ app.controller("BrowseController", function($scope) {
         if (index > -1) {
             $scope.compareList.splice(index, 1);
             var promise = checkCompareStorage($scope.compareList, true);
-            promise.done(function(compare){
+            promise.then(function(compare){
                 $scope.compareList = compare;
+            }, function(error) {
+                console.error("Failed!", error);
+                showPageError();
             });
         }
     };
@@ -78,7 +90,7 @@ app.controller("BrowseController", function($scope) {
             showClass(".browse .list ul .loader-div");
             //add 100 wines to storage
             var promise = addWinesToStorage("wines", jsonPopular+catRedWhiteRose, $scope.currentPage*$scope.pageSize, 100);
-            promise.done(function(data){
+            promise.then(function(data){
                 loadedWines = data;
                 console.log(loadedWines.length);
                 console.log(loadedWines);
@@ -89,6 +101,9 @@ app.controller("BrowseController", function($scope) {
 
                 hideClass(".browse .list ul .loader-div");
                 setTimeout(function(){showClass(".browse .list ul li");}, 500);
+            }, function(error) {
+                console.error("Failed!", error);
+                showPageError();
             });
 
         }
@@ -105,13 +120,16 @@ app.controller("BrowseController", function($scope) {
             showClass(".browse .list ul .loader-div");
             //add 100 wines to storage
             var promise = addWinesToStorage("wines", jsonPopular+catRedWhiteRose, $scope.currentPage*$scope.pageSize, 100);
-            promise.done(function(data){
+            promise.then(function(data){
                 loadedWines = data;
                 $scope.browseList = data.slice(($scope.currentPage*$scope.pageSize),needed);
                 console.log($scope.browseList);
                 $scope.$apply();
                 hideClass(".browse .list ul .loader-div");
                 setTimeout(function(){showClass(".browse .list ul li");}, 500);
+            }, function(error) {
+                console.error("Failed!", error);
+                showPageError();
             });
         }
     };
@@ -124,9 +142,11 @@ app.controller("BrowseController", function($scope) {
     $scope.detailsList = [];
     $scope.addToDetails = function(w){
         $scope.detailsList[0] = w;
+        setTimeout(function(){showClass(".wineDetails");}, 300);
     };
     $scope.hideDetails = function(){
         hideClass(".wineDetails");
+        $scope.detailsList = [];
     };
 
     $scope.searchList = [];
@@ -141,15 +161,16 @@ app.controller("BrowseController", function($scope) {
             showClass(".browse .list ul .loader-div");
 
             var promise = searchWine(input);
-            promise.done(function(search){
+            promise.then(function(search){
                 $scope.searchList = search;
                 $scope.currentPage = 0;
                 $scope.searching = true;
                 $scope.$apply();
                 hideClass(".browse .list ul .loader-div");
                 setTimeout(function(){showClass(".browse .list ul li");}, 500);
-            });
-            promise.fail(function(){
+            }, function(error) {
+                console.error("Failed!", error);
+
                 $scope.searching = true;
                 $scope.searchList = [];
 
@@ -158,6 +179,9 @@ app.controller("BrowseController", function($scope) {
                 $scope.$apply();
                 hideClass(".browse .list ul .loader-div");
                 setTimeout(function(){showClass(".browse .list ul li");}, 500);
+            });
+            promise.fail(function(){
+
             });
 
 
@@ -251,7 +275,7 @@ function searchWine(queryString){
 
     var searchList = [];
 
-                promiseJSONDefault("http://services.wine.com/api/beta2/service.svc/json/catalog?apikey=21d7fc7d0b855bad2ce0330eaf84bedc&search="+queryString)
+                promiseJSONDefault(jsonPopular+catRedWhiteRose+"&search="+queryString)
                     .done(function(search){
                         searchList = getWinesFromData(search);
                         def.resolve(searchList);

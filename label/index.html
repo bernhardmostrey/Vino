@@ -1,37 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>Vino - Label</title>
-    <!--<link href="css/bootstrap.min.css" rel="stylesheet" />-->
-    <link href="../css/style.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="http://use.typekit.net/c/18eb21/1w;brandon-grotesque,2,Y2h:P:i1,Y2g:P:n1,Y2j:P:n3,Y2n:P:n5;open-sans,2,VvG:P:i3,VvD:P:i4,VvF:P:n3,VvH:P:n4/d?3bb2a6e53c9684ffdc9a9bf61f5b2a62850218b0182b3a8f955d7ad2db6645a15a2fece75238ea26f1d85c9a1cbc76cb00e4efb7e79ecf0958e13855066b3466b2732dad8957bb80765959e885ec08226954a671c7986d991f797e750d51ea638e35088bc259d167bb">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-
-</head>
-<body ng-app="app" ng-controller="BrowseController" ng-cloak>
-<div class="clear-storage" onclick="localStorage.clear();"><p>Clear storage</p></div>
-<div class="page-wrap">
-
-<div class="container">
-    <header>
-        <h1>Vino</h1>
-        <nav>
-            <ul>
-                <li><a href="../">Home</a></li>
-                <li><a href="../browse">Browse</a></li>
-                <li><a href="../timeline">Timeline</a></li>
-                <li><a href="../map">Map</a></li>
-                <li><a href=".">Label Game</a></li>
-            </ul>
-        </nav>
-    </header>
-</div>
-<div class="container">
-
     <div id="label-wrapper">
         <div id="label">
-            <img src="../assets/label.jpg" width="100%"/>
+            <img src="assets/wine-label.jpg" width="100%"/>
             <!--<div class="object" style="-->
             <!--width: 8%;-->
             <!--height: 7%;-->
@@ -119,21 +88,4 @@
         <button ng-click="hideDetails()"><i class="fa fa-close fa-lg"></i></button>
     </div>
 
-</div>
-</div>
-<footer>
-    <p>&copy; Created by Bernhard Mostrey & Bram Regelbrugge</p>
-</footer>
-
-
-<script src="../scripts/jquery-1.11.1.min.js"></script>
-<script src="Game.js"></script>
-<script src="../scripts/angular.js"></script>
-<script src="../scripts/angular-animate.min.js"></script>
-<script src="../src/app/app.js"></script>
-
-<script src="LabelController.js"></script>
-<script src="../src/app/shared/Wine.js"></script>
-
-</body>
-</html>
+    <script src="label/Game.js"></script>

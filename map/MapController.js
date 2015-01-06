@@ -5,13 +5,16 @@ app.controller("MapController", function($scope) {
     resetMapHeight();
 
     var promise = mapInitPan("America", 50);
-    promise.done(function(){
+    promise.then(function(){
         $(".loader-div").animate({opacity: 0}, 1000, function(){
             $(".loader-div").hide();
         });
         $("#map").animate({opacity: 1}, 1000);
         l = new Object({lat: 47, long: 1});
         PanTo(l.lat, l.long);
+    }, function(error) {
+        console.error("Failed!", error);
+        showPageError();
     });
 
     promise.progress(function(data){

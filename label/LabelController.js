@@ -1,7 +1,7 @@
 /**
  * Created by bernhard on 23/12/14.
  */
-app.controller("BrowseController", function($scope) {
+app.controller("LabelController", function($scope) {
 
     $scope.labelComplete = false;
 
@@ -46,7 +46,7 @@ app.controller("BrowseController", function($scope) {
                 $scope.$apply();
             }
         }
-    }
+    };
     $scope.copyToClipboard = function(text){
             window.prompt("Copy to clipboard: Ctrl+C (or CMD+C on Mac), Enter", text);
     }

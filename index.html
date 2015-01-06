@@ -3,112 +3,33 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>Vino</title>
-    <!--<link href="css/bootstrap.min.css" rel="stylesheet" />-->
     <link href="css/style.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="http://use.typekit.net/c/18eb21/1w;brandon-grotesque,2,Y2h:P:i1,Y2g:P:n1,Y2j:P:n3,Y2n:P:n5;open-sans,2,VvG:P:i3,VvD:P:i4,VvF:P:n3,VvH:P:n4/d?3bb2a6e53c9684ffdc9a9bf61f5b2a62850218b0182b3a8f955d7ad2db6645a15a2fece75238ea26f1d85c9a1cbc76cb00e4efb7e79ecf0958e13855066b3466b2732dad8957bb80765959e885ec08226954a671c7986d991f797e750d51ea638e35088bc259d167bb">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBy69Rcd3tkCmmjAa_HcmDd-q-FzTVn7ek"></script>
+
+    <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:100,300,400,600,700' rel='stylesheet' type='text/css'>
+
 </head>
 <body ng-app="app" ng-controller="MainController" >
-<!--<div class="loader-div" id="PageLoad"><span class="loader"><span class="loader-inner"></span></span></div>-->
 <div class="clear-storage" onclick="localStorage.clear();"><p>Clear storage</p></div>
+<div class="error">test</div>
 
 <div class="container wrapper">
     <header>
         <h1>Vino</h1>
         <nav>
             <ul>
-                <li><a href=".">Home</a></li>
-                <li><a href="browse">Browse</a></li>
-                <li><a href="timeline">Timeline</a></li>
-                <li><a href="map">Map</a></li>
-                <li><a href="../label">Label Game</a></li>
+                <li><a href="#">Home</a></li>
+                <li><a href="#/browse">Browse</a></li>
+                <li><a href="#/years">Years</a></li>
+                <li><a href="#/map">Map</a></li>
+                <li><a href="#/label">Label Game</a></li>
             </ul>
         </nav>
     </header>
 </div>
-    <div class="carousel">
-        <img src="assets/wineheader.jpg" alt="" />
-    </div>
 
-<div class="container">
-    <div class="big bg-gray">
-        <h1>Ever wondered how other people like your favorite wine?</h1>
-        <h1>So did we!</h1>
-    </div>
-
-
-
-    <div class="top4">
-
-        <div class="loader-div"><span class="loader"><span class="loader-inner"></span></span></div>
-        <p ng-show="showTop4Error">{{error}}</p>
-        <ul>
-            <li  ng-repeat="w in top4">
-                <img src="{{w.ImageUrl}}" />
-                <h3 ng-click="addToDetails(w)">{{w.Name}}</h3>
-            </li>
-        </ul>
-    </div>
-
-    <div class="wineDetails" ng-repeat="w in detailsList">
-        <div class="img"><img fallback-src="{{w.labelUrl}}" src="{{w.ImageUrl}}" /></div>
-        <h4>{{w.Name}}</h4>
-        <div class="property">
-            <p>Appellation Name</p>
-            <div class="value"><p>{{w.AppellationName}}</p></div>
-        </div>
-
-        <div class="property">
-            <p>Region Name</p>
-            <div class="value"><p>{{w.RegionName}}</p></div>
-        </div>
-
-        <div class="property">
-            <p>Year</p>
-            <div class="value"><p>{{w.Year}}</p></div>
-        </div>
-
-        <div class="property">
-            <p>Varietal</p>
-            <div class="value"><p>{{w.Varietal}}</p></div>
-        </div>
-
-        <div class="property">
-            <p>Winetype</p>
-            <div class="value"><p>{{w.WineType}}</p></div>
-        </div>
-
-        <div class="property">
-            <p>Vineyard</p>
-            <div class="value"><p>{{w.VineyardName}}</p></div>
-        </div>
-
-        <div class="property">
-            <p>Highest Review</p>
-            <div class="value"><p>{{w.HighestReview}}</p></div>
-        </div>
-
-        <div class="property">
-            <p>Highest Rating</p>
-            <div class="value"><p>{{w.HighestRating}}</p></div>
-        </div>
-
-        <div class="property">
-            <p>Price</p>
-            <div class="value"><p>{{w.PriceRetail}}</p></div>
-        </div>
-
-        <div class="property">
-            <p>Attributes</p>
-            <div class="value"><p ng-repeat="a in w.Attributes">{{a.Name}}</p></div>
-        </div>
-
-        <div class="property">
-            <p>More Details on <a target="_blank" href="{{w.Link}}">Wine.com</a></p>
-        </div>
-
-        <button ng-click="hideDetails()"><i class="fa fa-close fa-lg"></i></button>
-    </div>
+<div id="view" ng-view>
 
 </div>
 
@@ -117,13 +38,21 @@
 </footer>
 
 
-<script src="scripts/jquery-1.11.1.min.js"></script>
-<script src="scripts/angular.js"></script>
+<!--<script src="scripts/jquery-1.11.1.min.js"></script>
+
+
+<script src="scripts/angular.min.js"></script>
+<script src="scripts/angular-route.min.js"></script>
 <script src="scripts/angular-animate.min.js"></script>
-<script src="src/app/app.js"></script>
+<script src="scripts/app.js"></script>
 
 <script src="MainController.js"></script>
-<script src="src/app/shared/Wine.js"></script>
-
+<script src="home/HomeController.js"></script>
+<script src="browse/BrowseController.js"></script>
+<script src="map/MapController.js"></script>
+<script src="label/LabelController.js"></script>
+<script src="years/YearsController.js"></script>
+<script src="scripts/Wine.js"></script>-->
+<script type="text/javascript" src="min/g=vino"></script>
 </body>
 </html>

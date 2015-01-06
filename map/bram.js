@@ -253,7 +253,7 @@ function BerekenMapCenterEnMaakMap(Wijnen){
 
 }
 var image = {
-    url: '../assets/WineBotleMin.png',
+    url: 'assets/WineBotleMin.png',
     size: new google.maps.Size(16, 58),
     origin: new google.maps.Point(0,0),
     anchor: new google.maps.Point(16, 29)
@@ -302,7 +302,7 @@ function addMarker(Wijnen) {
         });
 
         google.maps.event.addListener(marker, 'click', (function (marker, i) {
-            console.log(Wijnen[i]);
+            //console.log(Wijnen[i]);
             return function () {
                 //var contentString = '<div id="content"><h2>'+Wijnen[i].location+'</h2><h3>'+Wijnen[i].name+'</h3><img src="'+Wijnen[i].label+'" /><button><a target="_blank" href="'+Wijnen[i].url+'">More Info</a></button></div>';
                 var contentString = '<div id="content"><h2>'+Wijnen[i].location+'</h2><h3>'+Wijnen[i].name+'</h3><button><a target="_blank" href="'+Wijnen[i].url+'">More Info</a></button></div>';
@@ -322,7 +322,7 @@ function checkMapStorage(storagename, json, length, begin){
         // Code for localStorage/sessionStorage.
 
         if(localStorage.getItem(storagename) && JSON.parse(localStorage.getItem(storagename).length >= 100)){
-            console.log("got wines from storage");
+            //console.log("got wines from storage");
             loadedWines = JSON.parse(localStorage.getItem(storagename));
             /*loadedWines = MaakWijnArray(loadedWines);
             loadedWines = GetLatEnLong(loadedWines);*/
@@ -331,7 +331,7 @@ function checkMapStorage(storagename, json, length, begin){
             //store 100 json objects in localstorage
             promiseJSON(json, length, begin)
                 .done(function(data){
-                    console.log("try to get wines from api");
+                    //console.log("try to get wines from api");
                     loadedWines = data;
                     loadedWines = MaakWijnArray(loadedWines);
                     promise = GetLatEnLong(loadedWines);
@@ -344,6 +344,7 @@ function checkMapStorage(storagename, json, length, begin){
                 })
                 .fail(function(){
                     console.log("Problem when trying to get 100 wines with json"+json);
+                    showPageError();
                     def.reject();
                 });
 
