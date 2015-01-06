@@ -1,91 +1,70 @@
-    <div id="label-wrapper">
-        <div id="label">
-            <img src="assets/wine-label.jpg" width="100%"/>
-            <!--<div class="object" style="-->
-            <!--width: 8%;-->
-            <!--height: 7%;-->
-            <!--position: absolute;-->
-            <!--top: 80%;-->
-            <!--left: 30%;-->
-            <!--"></div>-->
-            <div id="options">
-                <ul >
-                    <!--<li ng-repeat="o in objects"><input type="radio" ng-click="radioChanged(o.name)" ng-checked="selectedObject.guessedName == o.name" name="object" value="o.name"><label>{{o.name}}</label></li>-->
-                    <li ng-repeat="o in objects">
-                        <button ng-show="selectedObject.guessedName == o.name" class="active" ng-click="radioChanged(o.name)" name="object">{{o.name}}</button>
-                        <button ng-hide="selectedObject.guessedName == o.name" ng-click="radioChanged(o.name)" name="object">{{o.name}}</button>
-                    </li>
-                </ul>
-                <!--<h2>Correct answers: {{numberCorrect}}</h2>-->
-            </div>
-            <div id="label-complete" ng-if="labelComplete">
-                <h1>Congratulations!</h1>
-                <h3>You can now go shopping for a gift basket with 15% off!</h3>
-                <button ng-click="copyToClipboard('RMN15GB')">Copy code RMN15GB to clipboard.</button>
-                <button><a target="_blank" href="http://www.wine.com/v6/giftcenter/">Go shopping!</a></button>
-            </div>
+<div id="label-wrapper">
+    <div id="label"><img src="assets/wine-label.jpg" width="100%"/>
+
+        <div id="options">
+            <ul>
+                <li ng-repeat="o in objects">
+                    <button ng-show="selectedObject.guessedName==o.name" class="active" ng-click="radioChanged(o.name)"
+                            name="object">{{o.name}}
+                    </button>
+                    <button ng-hide="selectedObject.guessedName==o.name" ng-click="radioChanged(o.name)" name="object">
+                        {{o.name}}
+                    </button>
+                </li>
+            </ul>
         </div>
+        <div id="label-complete" ng-if="labelComplete"><h1>Congratulations!</h1>
 
-
+            <h3>You can now go shopping for a gift basket with 15% off!</h3>
+            <button ng-click="copyToClipboard('RMN15GB')">Copy code RMN15GB to clipboard.</button>
+            <button><a target="_blank" href="http://www.wine.com/v6/giftcenter/">Go shopping!</a></button>
+        </div>
     </div>
+</div>
+<div class="wineDetails" ng-repeat="w in detailsList">
+    <div class="img"><img fallback-src="{{w.labelUrl}}" src="{{w.ImageUrl}}"/></div>
+    <h4>{{w.Name}}</h4>
 
+    <div class="property"><p>Appellation Name</p>
 
-
-
-    <div class="wineDetails" ng-repeat="w in detailsList">
-        <div class="img"><img fallback-src="{{w.labelUrl}}" src="{{w.ImageUrl}}" /></div>
-        <h4>{{w.Name}}</h4>
-        <div class="property">
-            <p>Appellation Name</p>
-            <div class="value"><p>{{w.AppellationName}}</p></div>
-        </div>
-
-        <div class="property">
-            <p>Region Name</p>
-            <div class="value"><p>{{w.RegionName}}</p></div>
-        </div>
-
-        <div class="property">
-            <p>Year</p>
-            <div class="value"><p>{{w.Year}}</p></div>
-        </div>
-
-        <div class="property">
-            <p>Varietal</p>
-            <div class="value"><p>{{w.Varietal}}</p></div>
-        </div>
-
-        <div class="property">
-            <p>Winetype</p>
-            <div class="value"><p>{{w.WineType}}</p></div>
-        </div>
-
-        <div class="property">
-            <p>Vineyard</p>
-            <div class="value"><p>{{w.VineyardName}}</p></div>
-        </div>
-
-        <div class="property">
-            <p>Highest Review</p>
-            <div class="value"><p>{{w.HighestReview}}</p></div>
-        </div>
-
-        <div class="property">
-            <p>Highest Rating</p>
-            <div class="value"><p>{{w.HighestRating}}</p></div>
-        </div>
-
-        <div class="property">
-            <p>Price</p>
-            <div class="value"><p>{{w.PriceRetail}}</p></div>
-        </div>
-
-        <div class="property">
-            <p>Attributes</p>
-            <div class="value"><p ng-repeat="a in w.Attributes">{{a.Name}}</p></div>
-        </div>
-
-        <button ng-click="hideDetails()"><i class="fa fa-close fa-lg"></i></button>
+        <div class="value"><p>{{w.AppellationName}}</p></div>
     </div>
+    <div class="property"><p>Region Name</p>
 
-    <script src="label/Game.js"></script>
+        <div class="value"><p>{{w.RegionName}}</p></div>
+    </div>
+    <div class="property"><p>Year</p>
+
+        <div class="value"><p>{{w.Year}}</p></div>
+    </div>
+    <div class="property"><p>Varietal</p>
+
+        <div class="value"><p>{{w.Varietal}}</p></div>
+    </div>
+    <div class="property"><p>Winetype</p>
+
+        <div class="value"><p>{{w.WineType}}</p></div>
+    </div>
+    <div class="property"><p>Vineyard</p>
+
+        <div class="value"><p>{{w.VineyardName}}</p></div>
+    </div>
+    <div class="property"><p>Highest Review</p>
+
+        <div class="value"><p>{{w.HighestReview}}</p></div>
+    </div>
+    <div class="property"><p>Highest Rating</p>
+
+        <div class="value"><p>{{w.HighestRating}}</p></div>
+    </div>
+    <div class="property"><p>Price</p>
+
+        <div class="value"><p>{{w.PriceRetail}}</p></div>
+    </div>
+    <div class="property"><p>Attributes</p>
+
+        <div class="value"><p ng-repeat="a in w.Attributes">{{a.Name}}</p></div>
+    </div>
+    <button ng-click="hideDetails()"><i class="fa fa-close fa-lg"></i></button>
+</div>
+<script src="label/Game.js"></script>
