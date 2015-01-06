@@ -45,6 +45,8 @@ footer > p{padding-top:30px;}
 .browse .filters form button[type=submit]{margin:2% 2% 2% 0;line-height:19px;height:28px;width:16%;}
 .browse .filters > ul{}
 .browse .filters > ul li{text-align:left;margin:10px;padding:2px 12px;font-size:12px;text-transform:uppercase;cursor:pointer;}
+.browse .filters > ul li:hover{background-color: rgba(224, 79, 79, 0.9);color: white;cursor: pointer;}
+.browse .filters > ul li.active{background-color: rgba(224, 79, 79, 0.9);color: white;}
 .browse > .list{width:72%;float:right;min-height:966px;position:relative;margin-left:3%;}
 .browse > .list > ul{list-style:none;min-height:1000px;}
 .browse > .list > ul li{overflow:hidden;}
@@ -58,7 +60,7 @@ footer > p{padding-top:30px;}
 .browse > .list > ul li > div.details > p{margin:0;font-size:0.9em;}
 .browse > .list > ul li > div.actions{float:right;width:16%;}
 .browse > .list > ul li > div.actions > h2{margin:0;}
-button, input[type="submit"]{font-family:inherit;padding:.5em 1em;text-decoration:none;cursor:pointer;background-color:#E04F4F;color:white;border:none;}
+button, input[type="submit"]{font-family:inherit;padding:.5em 1em;text-decoration:none;cursor:pointer;background-color: rgba(224, 79, 79, 0.9);color:white;border:none;}
 button a, input[type="submit"] a{color:white;text-decoration:none;}
 button:hover, input[type="submit"]:hover{background-color:#b13e3e;}
 button:focus, input[type="submit"]:focus{outline:0;}

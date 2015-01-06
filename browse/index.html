@@ -6,9 +6,9 @@
         <div class="left">
             <div class="filters">
                 <ul>
-                    <li ng-click="sortOrder = ''">Sort by Popularity</li>
-                    <li ng-click="sortOrder = 'HighestRating'">Sort by Rating</li>
-                    <li ng-click="sortOrder = 'PriceRetail'">Sort by Price</li>
+                    <li  ng-class="{active:sortOrder==''}" ng-click="sortOrder = ''">Sort by Popularity</li>
+                    <li  ng-class="{active:sortOrder=='HighestRating'}" ng-click="sortOrder = 'HighestRating'">Sort by Rating</li>
+                    <li  ng-class="{active:sortOrder=='PriceRetail'}" ng-click="sortOrder = 'PriceRetail'">Sort by Price</li>
                     <li>
                         <form ng-submit="search()"><input type="text" id="search"/>
                             <button type="submit"><i class="fa fa-search fa-lg"></i></button>
