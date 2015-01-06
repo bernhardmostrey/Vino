@@ -48,12 +48,13 @@ app.directive('fallbackSrc', function () {
         return input.slice(start);
     }
 });*/
-
+var apikey = "4d39eb962eec3418347f549ed7daac01";
+//var apikey = "21d7fc7d0b855bad2ce0330eaf84bedc";
 /*var jsonFrance = "http://services.wine.com/api/beta2/service.svc/json/catalog?apikey=21d7fc7d0b855bad2ce0330eaf84bedc&sortBy=popularity&filter=categories(490+10038+10039+102)";
 var jsonItaly = "http://services.wine.com/api/beta2/service.svc/json/catalog?apikey=21d7fc7d0b855bad2ce0330eaf84bedc&sortBy=popularity&filter=categories(7155+105)";
 var jsonSpain = "http://services.wine.com/api/beta2/service.svc/json/catalog?apikey=21d7fc7d0b855bad2ce0330eaf84bedc&sortBy=popularity&filter=categories(7155+109)";*/
-var jsonPopular = "http://services.wine.com/api/beta2/service.svc/json/catalog?apikey=21d7fc7d0b855bad2ce0330eaf84bedc&sortBy=popularity|descending";
-var jsonRating = "http://services.wine.com/api/beta2/service.svc/json/catalog?apikey=21d7fc7d0b855bad2ce0330eaf84bedc&sortBy=rating|descending";
+var jsonPopular = "http://services.wine.com/api/beta2/service.svc/json/catalog?apikey="+apikey+"&sortBy=popularity|descending";
+var jsonRating = "http://services.wine.com/api/beta2/service.svc/json/catalog?apikey="+apikey+"&sortBy=rating|descending";
 var catRedWhiteRose = "&filter=categories(490+124+125+126)";
 var catFrance = "&filter=categories(490+124+125+126+10039+10038+102)";
 var catItaly = "&filter=categories(490+124+125+126+105)";

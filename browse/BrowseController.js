@@ -243,7 +243,7 @@ function checkCompareStorage(currentList, bRemove){
                 });
                 currentIDs = currentIDs.substring(0, currentIDs.length-1);
 
-                promiseJSONDefault("http://services.wine.com/api/beta2/service.svc/json/catalog?apikey=21d7fc7d0b855bad2ce0330eaf84bedc&filter=product("+currentIDs+")")
+                promiseJSONDefault("http://services.wine.com/api/beta2/service.svc/json/catalog?apikey="+apikey+"&filter=product("+currentIDs+")")
                     .done(function(compare){
                         compareList = getWinesFromData(compare);
                         console.log(compareList.length - currentList.length);
