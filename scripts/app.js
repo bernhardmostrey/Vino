@@ -282,3 +282,21 @@ function showPageError(){
     $("html, body").animate({ scrollTop: 0 });
     setTimeout(function(){hideClass(".error")}, 5000);
 }
+function searchWine(queryString){
+    var def = $.Deferred();
+
+    var searchList = [];
+
+    promiseJSONDefault(jsonPopular+catRedWhiteRose+"&search="+queryString)
+        .done(function(search){
+            searchList = getWinesFromData(search);
+            def.resolve(searchList);
+        })
+        .fail(function(){
+            console.log("Problem when searching");
+            def.reject();
+        });
+
+
+    return def.promise();
+};

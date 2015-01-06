@@ -50,6 +50,36 @@ app.controller("MapController", function($scope) {
         PanTo(l.lat, l.long);
     };
 
+    $scope.detailsList = [];
+    $scope.addToDetails = function(w){
+        $scope.detailsList[0] = w;
+        setTimeout(function(){showClass(".wineDetails");}, 300);
+    };
+    addToDetailsString = function(id){
+        console.log("klik");
+        promiseJSONDefault("http://services.wine.com/api/beta2/service.svc/json/catalog?apikey="+apikey+"&filter=product("+id+")")
+            .done(function(found){
+                if(found.length > 0){
+                    search = getWinesFromData(found);
+                    $scope.detailsList[0] = search[0];
+                    $scope.$apply();
+                    setTimeout(function(){showClass(".wineDetails");}, 300);
+                }else{
+                    showPageError();
+                }
+
+
+            })
+            .fail(function(){
+                console.log("Problem when storing currentlist");
+                showPageError();
+            });
+    };
+    $scope.hideDetails = function(){
+        hideClass(".wineDetails");
+        $scope.detailsList = [];
+    };
+
 
 });
 

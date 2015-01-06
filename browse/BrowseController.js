@@ -7,6 +7,7 @@ app.controller("BrowseController", function($scope) {
     $scope.currentPage = 0;
     $scope.pageSize = 20;
 
+    $scope.sortOrder = "",
 
     $scope.compareList = [];
     var promise = checkCompareStorage($scope.compareList, false).fail();
@@ -213,6 +214,8 @@ function getCertainWines(list, start, length){
                         console.log(err);
                         console.log(value);
                         console.log(list);
+                    console.error("Failed!", error);
+                    showPageError();
                     }
             }
 
@@ -259,6 +262,7 @@ function checkCompareStorage(currentList, bRemove){
                     })
                     .fail(function(){
                         console.log("Problem when storing currentlist");
+                        showPageError();
                         def.reject();
                     });
             }else{
@@ -270,21 +274,3 @@ function checkCompareStorage(currentList, bRemove){
     return def.promise();
 }
 
-function searchWine(queryString){
-    var def = $.Deferred();
-
-    var searchList = [];
-
-                promiseJSONDefault(jsonPopular+catRedWhiteRose+"&search="+queryString)
-                    .done(function(search){
-                        searchList = getWinesFromData(search);
-                        def.resolve(searchList);
-                    })
-                    .fail(function(){
-                        console.log("Problem when searching");
-                        def.reject();
-                    });
-
-
-    return def.promise();
-}

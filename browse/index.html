@@ -1,11 +1,14 @@
-<div class="carousel" style="height: 250px;"><img src="assets/wineheader.jpg" alt="" style="margin-top: -115px;"/></div>
+<!--
+<div class="carousel"><img src="assets/wineheader.jpg" alt="" style="margin-top: -115px;"/></div>
+-->
 <div class="container">
     <div class="browse">
         <div class="left">
             <div class="filters">
                 <ul>
-                    <li>Sort by Popularity</li>
-                    <li>Sort by Rating</li>
+                    <li ng-click="sortOrder = ''">Sort by Popularity</li>
+                    <li ng-click="sortOrder = 'HighestRating'">Sort by Rating</li>
+                    <li ng-click="sortOrder = 'PriceRetail'">Sort by Price</li>
                     <li>
                         <form ng-submit="search()"><input type="text" id="search"/>
                             <button type="submit"><i class="fa fa-search fa-lg"></i></button>

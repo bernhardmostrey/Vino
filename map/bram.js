@@ -167,6 +167,7 @@ function MaakWijnArray(data){
             wijn.latitude = 666;
             wijn.longitude = 666;
             wijn.name = data[i].Name;
+            wijn.id = data[i].Id;
             wijn.url = data[i].Url;
             wijn.label = data[i].Labels[0].Url;
             TempWineArray.push(wijn);
@@ -305,7 +306,7 @@ function addMarker(Wijnen) {
             //console.log(Wijnen[i]);
             return function () {
                 //var contentString = '<div id="content"><h2>'+Wijnen[i].location+'</h2><h3>'+Wijnen[i].name+'</h3><img src="'+Wijnen[i].label+'" /><button><a target="_blank" href="'+Wijnen[i].url+'">More Info</a></button></div>';
-                var contentString = '<div id="content"><h2>'+Wijnen[i].location+'</h2><h3>'+Wijnen[i].name+'</h3><button><a target="_blank" href="'+Wijnen[i].url+'">More Info</a></button></div>';
+                var contentString = '<div id="content"><h2>'+Wijnen[i].location+'</h2><h3>'+Wijnen[i].name+'</h3><button onclick="addToDetailsString('+Wijnen[i].id+');">More Info</button></div>';
                 infowindow.setContent(contentString);
                 infowindow.open(map, marker);
             }
