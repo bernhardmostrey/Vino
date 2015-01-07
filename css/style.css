@@ -14,8 +14,10 @@ p{font-weight:100;margin:14px 0;}
 .container{width:80%;margin:0 auto;}
 .error{background:red;color:white;padding:1em;display:none;z-index:1;position:relative;}
 .ellipse{ white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
+#mobile-nav {display: none;}
 header{overflow:hidden;padding:0px 20px;}
 header > h1{float:left;margin:20px 0px;font-size:3em;}
+header > h1 > a {color: #000; text-decoration: none;}
 header > nav{float:right;margin-top:52px;}
 header > nav > ul{list-style:none;}
 header > nav > ul li{float:left;margin:0px 15px;padding:0px 10px;}
@@ -41,8 +43,9 @@ footer > p{padding-top:30px;}
 .browse{overflow:hidden;margin:20px auto;width:90%;}
 .browse > .left{float:left;width:25%;background-color:#EDEDED;border-top-left-radius:5px;border-top-right-radius:5px;}
 .browse .filters{}
-.browse .filters form #search{padding:5px 5px;border:none;font-size:14px;margin:2% 2% 2% 0;width:78%;}
-.browse .filters form button[type=submit]{margin:2% 2% 2% 0;line-height:19px;height:28px;width:16%;}
+.browse .filters form {margin: 0 -15px;}
+.browse .filters form #search{padding:5px 5px;border:none;font-size:14px;2% 1% 0% 0;width:70%;}
+.browse .filters form button[type=submit], .browse .filters form button[type=reset]{margin:0;line-height:19px;height:28px;width:13%;}
 .browse .filters > ul{}
 .browse .filters > ul li{text-align:left;margin:10px;padding:2px 12px;font-size:12px;text-transform:uppercase;cursor:pointer;}
 .browse .filters > ul li:hover{background-color: rgba(224, 79, 79, 0.9);color: white;cursor: pointer;}
@@ -172,17 +175,21 @@ button:focus, input[type="submit"]:focus{outline:0;}
     .browse > .list > ul li > div.details > div.attributes > h3{font-size:12px;}
     .browse > .list > ul li > div.details > p{margin:0;font-size:12px;}
     #label-wrapper #options{font-size:75%;}
+    .browse .filters form #search{width: 69%;}
+    .browse .filters form button[type=submit], .browse .filters form button[type=reset]{width: 14%;}
 }
-@media screen and (max-width:1300px){#label-wrapper #options{font-size:75%;width:18%;}
+@media screen and (max-width:1300px){
+    #label-wrapper #options{font-size:75%;width:18%;}
+    .browse .filters form #search{width: 64%;}
+    .browse .filters form button[type=submit], .browse .filters form button[type=reset]{width: 16%;}
 }
 @media screen and (max-width:1000px){.browse .comparer > ul{margin:5%;}
     .browse .comparer > ul li button{width:35px;}
     .browse .compare-big {width: 100%;float:none;}
     .browse .compare-big .properties .property{white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
-    .browse .filters form #search{}
-    .browse .filters form button[type=submit]{}
+
     .browse > .left{float:none;width:100%;overflow:hidden;margin-bottom:20px;}
-    .browse > .list{float:none;width:100%;}
+    .browse > .list{float:none;width:100%;margin: 0;}
     .browse .filters{width:40%;float:left;}
     .browse .comparer{width:60%;float:left;}
     #label-wrapper #options{font-size:60%;width:19%;}
@@ -191,4 +198,34 @@ button:focus, input[type="submit"]:focus{outline:0;}
     .wineDetails p {margin: 5px 0;}
     .wineDetails .property > .value p {font-size: 0.8em;}
 }
-@media screen and (max-width:860px){}
+@media screen and (max-width:860px){
+
+}
+@media screen and (max-width:650px){
+    .container {width: 95%;}
+    header > h1 {float:none;}
+    header > nav {float: none; margin: 0px;width: 160px;position: fixed; left: -160px; top: 0; background-color: #333; z-index:1; height: 100%;-webkit-transition: all 500ms; /* For Safari 3.1 to 6.0 */ transition: all 500ms}
+    header > nav.open {left: 0px;;}
+    header > nav > ul {overflow: hidden;}
+    header > nav > ul li {margin: 15px 5px; float: none; text-align: left;}
+    header > nav > ul li a {color: #FFF; font-size: 1em;}
+    .big {font-size: 50%;}
+    .big h1 {margin: 0;}
+    .top4 {font-size: 70%;}
+    .top4 > ul li {padding: 10px;}
+    .browse {margin: 0 auto;width:100%;}
+    .browse .filters, .browse .comparer {float: none; width: 100%;}
+    .browse .filters form #search{width: 78%;}
+    .browse .filters form button[type=submit], .browse .filters form button[type=reset]{width: 10%;}
+    .browse .compare-big > ul li > h4 {height: 80px;}
+    .browse .compare-big .properties {margin: 178px 0% 0% 0%;}
+    .browse .compare-big #close { width: 7%; }
+    .browse > .list > ul li > div.img > img {max-height: 70px;}
+    .browse > .list > ul li {margin: 10px 0px;}
+    .wineDetails {width: 95%;left: 2%;}
+    #label {width: 100%;}
+    #label-wrapper #options > ul li {margin: 3px;}
+    #mobile-nav {display: block; position: absolute; right: -30px; top: 15px;}
+    #mobile-nav:hover {color: #D2312B; cursor: pointer;}
+    #map-wrapper .panner > ul li {padding: 15px; margin: 10px;}
+}

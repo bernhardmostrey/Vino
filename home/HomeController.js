@@ -13,7 +13,7 @@ app.controller("HomeController", function($scope) {
             $scope.top4 = loadedWines.slice(0, 4);
             hideClass(".top4 .loader-div");
             setTimeout(function(){showClass(".top4 ul");}, 500);
-            $scope.$apply();
+            //$scope.$apply();
         }
     }, function(error) {
         console.error("Failed!", error);

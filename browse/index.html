@@ -12,6 +12,7 @@
                     <li>
                         <form ng-submit="search()"><input type="text" id="search"/>
                             <button type="submit"><i class="fa fa-search fa-lg"></i></button>
+                            <button type="reset" ng-click="searchList = []; searching = false;"><i class="fa fa-remove fa-lg"></i></button>
                         </form>
                     </li>
                 </ul>

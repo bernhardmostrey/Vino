@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html manifest="manifest.appcache">
 <head lang="en">
     <meta charset="UTF-8">
     <title>Vino</title>
@@ -7,15 +7,16 @@
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <script type="text/javascript"
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBy69Rcd3tkCmmjAa_HcmDd-q-FzTVn7ek"></script>
-    <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:100,300,400,600,700' rel='stylesheet'
-          type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:100,300,400,600,700' rel='stylesheet' type='text/css'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body ng-app="app" ng-controller="MainController">
 <div class="clear-storage" onclick="localStorage.clear();"><p>Clear storage</p></div>
 <div class="error">test</div>
 <div class="container wrapper">
-    <header><h1>Vino</h1>
+    <header><h1><a href="#/">Vino</a></h1>
         <nav>
+            <i id="mobile-nav" class="fa fa-bars fa-lg"></i>
             <ul>
                 <li ng-class="{active:isActive('/')}"><a href="#">Home</a></li>
                 <li ng-class="{active:isActive('/browse')}"><a href="#/browse">Browse</a></li>
@@ -31,7 +32,6 @@
 <script src="scripts/jquery-1.11.1.min.js"></script>
 <script src="scripts/angular.min.js"></script>
 <script src="scripts/angular-route.min.js"></script>
-<script src="scripts/angular-animate.min.js"></script>
 <script src="scripts/app.js"></script>
 <script src="MainController.js"></script>
 <script src="home/HomeController.js"></script>

@@ -32,7 +32,7 @@ app.controller("BrowseController", function($scope) {
                 })
             });
             $scope.browseList = list;
-            $scope.$apply();
+            //$scope.$apply();
             hideClass(".browse .list ul .loader-div");
             setTimeout(function(){showClass(".browse .list ul li");}, 500);
         }

@@ -84,6 +84,11 @@ app.controller("MapController", function($scope) {
 });
 
 function resetMapHeight(){
-    availableHeight = window.innerHeight - 180;
+    if(window.innerWidth > 550){
+        availableHeight = window.innerHeight - 180;
+    }else{
+        availableHeight = window.innerHeight - 265;
+    }
+
     $("#map").css("height", availableHeight+"px");
 }
